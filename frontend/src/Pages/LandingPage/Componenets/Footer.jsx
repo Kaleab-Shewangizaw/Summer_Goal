@@ -5,7 +5,7 @@ import { FaTelegramPlane } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaPhone } from "react-icons/fa6";
 
-const Footer = () => {
+const Footer = (props) => {
   return (
     <div className="footer">
       <div className="content">
@@ -49,7 +49,9 @@ const Footer = () => {
             <FaLinkedin className="linkedin" />
           </a>
         </div>
-        <button className="cta_btn">Start Planning</button>
+        <button onClick={props.handleLogin} className="cta_btn">
+          Start Planning
+        </button>
       </div>
       <div className="copyright">
         <p>© 2025 SummerPlanner</p>

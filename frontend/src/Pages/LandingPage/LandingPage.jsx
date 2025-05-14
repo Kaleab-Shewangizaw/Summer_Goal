@@ -5,9 +5,14 @@ import FeaturesSection from "./Componenets/FeaturesSection";
 import HowItWorks from "./Componenets/HowItWorks";
 import About from "./Componenets/About";
 import Footer from "./Componenets/Footer";
+import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
   const [isMobile, setIsMobile] = React.useState(false);
+  const navigate = useNavigate();
+  const handleLoginClick = () => {
+    navigate("/Signup");
+  };
   const handleResize = () => {
     if (window.innerWidth <= 800) {
       setIsMobile(true);
@@ -28,12 +33,12 @@ const LandingPage = () => {
   }
   return (
     <>
-      <Navbar />
-      <HeroSection />
+      <Navbar handleLogin={handleLoginClick} />
+      <HeroSection handleLogin={handleLoginClick} />
       <FeaturesSection />
       <HowItWorks />
       <About />
-      <Footer />
+      <Footer handleLogin={handleLoginClick} />
     </>
   );
 };

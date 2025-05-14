@@ -5,7 +5,7 @@ import Image2 from "../images/img2.png";
 import Image3 from "../images/img3.png";
 import Image4 from "../images/img4.webp";
 
-const HeroSection = () => {
+const HeroSection = (props) => {
   return (
     <div className="hero">
       <div className="hero-content">
@@ -15,7 +15,9 @@ const HeroSection = () => {
           rainiest days.
         </p>
         <div className="btns">
-          <button className="hero-button">Get Started</button>
+          <button onClick={props.handleLogin} className="hero-button">
+            Get Started
+          </button>
           <button className="btn-line">How It Works</button>
         </div>
       </div>

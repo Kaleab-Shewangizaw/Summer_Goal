@@ -1,0 +1,168 @@
+.signup {
+  display: flex;
+  height: 900px;
+  margin-top: 20px;
+  width: 99%;
+  gap: 5px;
+  margin-inline: auto;
+}
+
+.left-c {
+  padding-block: 5%;
+  width: 40%;
+  background-color: #181e1a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  height: 100%;
+}
+
+.left-c .signup-form {
+  text-align: left;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  height: 70%;
+  margin-top: 40px;
+}
+
+.left-c .signup-form h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+}
+
+.left-c .signup-form p {
+  font-size: 1.2rem;
+  margin-bottom: 50px;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  width: 60%;
+}
+
+.left-c .signup-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.left-c .signup-form form input {
+  padding: 10px;
+  border-radius: 5px;
+  height: 40px;
+  width: 355px;
+  border: none;
+  font-size: 18px;
+  color: #d4d4d4;
+  background-color: #0c0c0c;
+}
+
+.left-c .signup-form form input:focus {
+  outline: none;
+}
+
+.left-c .signup-form form input::placeholder {
+  color: #474646;
+}
+
+.left-c .signup-form form button {
+  background-color: #ffffff;
+  color: #0c0c0c;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 15px;
+  cursor: pointer;
+  width: 145px;
+  height: 40px;
+}
+.left-c .signup-form form button:hover {
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+}
+.left-c .signup-form form button:active {
+  background-color: #0c0c0c;
+  color: #ffffff;
+}
+.left-c .signup-form form button:focus {
+  outline: none;
+}
+
+.left-c .signup-form p:last-child {
+  font-size: 1rem;
+  margin-top: 20px;
+  margin-bottom: 0;
+}
+
+.left-c .social-login {
+  display: flex;
+  gap: 20px;
+  height: 100%;
+  width: 100%;
+}
+
+.left-c .social-login .google {
+  background-color: #3b3a3a;
+  border-radius: 5px;
+  padding: 10px;
+  width: 90px;
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.left-c .social-login .google img {
+  width: 30px;
+  height: 30px;
+}
+
+.left-c .social-login .google:hover {
+  transform: scale(1.05);
+  transition: all 0.3s ease-in-out;
+}
+
+.right-c {
+  width: 60%;
+  display: flex;
+  height: 100%;
+}
+
+.signup-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: right;
+  align-items: flex-end;
+  height: 100%;
+}
+
+.signup-footer p {
+  font-size: 1rem;
+  margin-top: 20px;
+  margin-bottom: 0;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+}
+
+.signup-footer p p {
+  color: #ffffff;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-block;
+}
+.signup-footer p p:hover {
+  text-decoration: underline;
+}
+
+.right-c img {
+  width: 100%;
+  height: 900px;
+  object-fit: cover;
+  border-radius: 8px;
+}

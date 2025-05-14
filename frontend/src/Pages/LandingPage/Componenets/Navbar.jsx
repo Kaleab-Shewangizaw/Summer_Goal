@@ -1,7 +1,7 @@
 import React from "react";
 import "./NavbarStyle.css";
 
-const Navbar = () => {
+const Navbar = (props) => {
   return (
     <div className="navbar">
       {/* logo */}
@@ -30,7 +30,9 @@ const Navbar = () => {
       </div>
       {/* cta */}
 
-      <button className="cta_btn">Start Planning</button>
+      <button onClick={props.handleLogin} className="cta_btn">
+        Start Planning
+      </button>
     </div>
   );
 };

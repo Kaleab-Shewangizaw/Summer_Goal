@@ -22,7 +22,7 @@
   color: white;
 }
 
-.logo .logo_icon {
+.logo_icon {
   width: 40px;
   height: 40px;
   background-color: #f52a2a;
@@ -33,10 +33,11 @@
   position: relative;
 }
 
-.logo .logo_icon h3 {
+.logo_icon h3 {
   font-size: 20px;
   position: relative;
   bottom: 2px;
+  font-family: "DM Sans", sans-serif;
 }
 
 .navbar .nav_links {
