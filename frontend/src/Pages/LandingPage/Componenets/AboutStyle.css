@@ -1,0 +1,57 @@
+.about {
+  color: white;
+  font-family: "DM sans", sans-serif;
+  width: 82%;
+  margin-inline: auto;
+  margin-top: 120px;
+}
+
+.about h1 {
+  font-family: "Rubik", sans-serif;
+  font-weight: 300;
+  font-size: 2.3vw;
+  margin: 0;
+}
+
+p {
+  font-family: "DM sans", sans-serif;
+  font-weight: 300;
+  font-size: 1.2vw;
+  color: #9c9c9c;
+  margin-top: 0;
+}
+
+.about h3 {
+  font-family: "DM sans", sans-serif;
+  font-weight: 500;
+  font-size: 1.3vw;
+  color: #fdfdfd;
+  margin-top: 40px;
+}
+
+.about .about-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0;
+  margin-top: 5vh;
+  margin-inline: auto;
+}
+
+.about .about-content p:first-child {
+  background-color: #000000;
+  padding-block: 4%;
+  padding-inline: 5%;
+  border-radius: 10px;
+  text-align: left;
+  color: rgb(201, 201, 201);
+  margin-bottom: 0;
+  width: 70%;
+}
+
+.about .about-content p:last-child {
+  text-align: left;
+  width: 70%;
+  padding: 2% 5%;
+}
