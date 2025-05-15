@@ -166,3 +166,14 @@
   object-fit: cover;
   border-radius: 8px;
 }
+
+.show-password span {
+  font-family: "DM Sans", sans-serif;
+  font-weight: 400;
+  font-size: 0.8rem;
+  cursor: pointer;
+  margin-left: 5px;
+  border: 1px solid #8c8b8b;
+  padding: 0.5rem;
+  border-radius: 8px;
+}

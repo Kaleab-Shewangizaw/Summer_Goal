@@ -4,6 +4,10 @@ import { useNavigate } from "react-router-dom";
 import LoginImg from "../LandingPage/images/loginI.jpg";
 
 const Login = () => {
+  const [isShowen, setIsShowen] = React.useState(false);
+  const showPassword = () => {
+    setIsShowen(!isShowen);
+  };
   const navigate = useNavigate();
   return (
     <div className="signup">
@@ -19,7 +23,14 @@ const Login = () => {
           </p>
           <form>
             <input type="email" placeholder="Email" required />
-            <input type="password" placeholder="Password" required />
+            <div className="show-password">
+              <input
+                type={isShowen ? "text" : "password"}
+                placeholder="Password"
+                required
+              />
+              <span onClick={showPassword}>{isShowen ? "Hide" : "Show"}</span>
+            </div>
             <button type="submit">Log in</button>
           </form>
           <p>or continue with:</p>

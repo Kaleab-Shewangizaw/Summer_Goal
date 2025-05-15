@@ -2,8 +2,8 @@
   font-family: "Inter", sans-serif;
 }
 
-.home-banner {
-}
+/* .home-banner {
+} */
 
 .home-banner .home-banner-text h1 {
   font-size: 1.7rem;
@@ -68,7 +68,8 @@
   align-items: flex-start;
   flex-wrap: wrap;
   justify-content: space-around;
-  gap: 1rem;
+
+  flex-wrap: wrap;
 }
 
 .tracker .tracker-c {
@@ -86,6 +87,9 @@
   height: 100%;
   padding: 1rem;
   border-radius: 8px;
+  border: 1px solid hsl(0, 0%, 20%);
+
+  min-width: fit-content;
 }
 
 .tracker .tracker-c h2 {
@@ -100,15 +104,22 @@
 }
 
 .tracker .tracker-c p {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
   text-align: left;
   padding-left: 10px;
   font-size: 1rem;
   color: hsl(0, 0%, 40%);
   font-weight: 300;
+  flex-wrap: wrap;
 }
 
 .tracker .tracker-c p span {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
   font-weight: 700;
   color: hsl(0, 0%, 98%);
 }

@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from "react";
 import "./HomeStyle.css";
-import { FaHome, FaClipboardCheck, FaMedal } from "react-icons/fa";
-import { IoIosRocket } from "react-icons/io";
+import {
+  FaHome,
+  FaClipboardCheck,
+  FaMedal,
+  FaCheckCircle,
+} from "react-icons/fa";
+import { IoIosRocket, IoMdCloudDone } from "react-icons/io";
+import { BsGraphUp } from "react-icons/bs";
 import PlanCard from "./PlanCard";
+import { CiNoWaitingSign } from "react-icons/ci";
 
 const Home = () => {
   function getDaysLeft() {
@@ -71,16 +78,29 @@ const Home = () => {
           </h2>
 
           <p>
-            <span>Completed</span>: 3/5 <span className="percent">60%</span>
+            <span>
+              {" "}
+              <FaCheckCircle /> Completed
+            </span>
+            3/5 <span className="percent">60%</span>
           </p>
           <p>
-            <span>In Progress</span>: 2/5 <span className="percent">40%</span>
+            <span>
+              <BsGraphUp /> In Progress
+            </span>
+            2/5 <span className="percent">40%</span>
           </p>
           <p>
-            <span>Not Started</span>: 0/5 <span className="percent">0%</span>
+            <span>
+              <CiNoWaitingSign /> Not Started
+            </span>
+            0/5 <span className="percent">0%</span>
           </p>
           <p>
-            <span>Overdue</span>: 0/5 <span className="percent">0%</span>
+            <span>
+              <IoMdCloudDone /> Overdue
+            </span>
+            0/5 <span className="percent">0%</span>
           </p>
         </div>
         <div className="tracker-c">
