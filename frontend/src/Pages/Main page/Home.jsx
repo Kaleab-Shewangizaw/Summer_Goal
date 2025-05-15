@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+
 import "./HomeStyle.css";
 import {
   FaHome,
@@ -10,8 +11,11 @@ import { IoIosRocket, IoMdCloudDone } from "react-icons/io";
 import { BsGraphUp } from "react-icons/bs";
 import PlanCard from "./PlanCard";
 import { CiNoWaitingSign } from "react-icons/ci";
+import { useNavigate } from "react-router-dom";
+import SkillCard from "./SkillCard";
 
 const Home = () => {
+  const navigate = useNavigate();
   function getDaysLeft() {
     const today = new Date();
     const year =
@@ -74,7 +78,7 @@ const Home = () => {
             <FaClipboardCheck
               style={{ color: "hsl(120, 100%, 50%)", fontSize: "2rem" }}
             />{" "}
-            Goals
+            Plans
           </h2>
 
           <p>
@@ -98,7 +102,7 @@ const Home = () => {
           </p>
           <p>
             <span>
-              <IoMdCloudDone /> Overdue
+              <IoMdCloudDone /> over all
             </span>
             0/5 <span className="percent">0%</span>
           </p>
@@ -122,7 +126,7 @@ const Home = () => {
             Achievements
           </h2>
           <p>
-            <span>coming soon</span>
+            <span style={{ color: "hsl(0, 0%, 40%)" }}>coming soon...</span>
           </p>
         </div>
       </div>
@@ -131,6 +135,38 @@ const Home = () => {
         <h2>Next Plan</h2>
         <div className="planView">
           <PlanCard />
+          <PlanCard />
+          <PlanCard />
+          <PlanCard />
+          <button
+            onClick={() => {
+              navigate("/home/my-plans");
+            }}
+            style={{}}
+            className="see-all-btn"
+          >
+            See All Plans
+          </button>
+        </div>
+      </div>
+
+      <div className="section2">
+        <h2>Next Skill</h2>
+        <div className="planView">
+          <SkillCard />
+          <SkillCard />
+          <SkillCard />
+          <SkillCard />
+          <SkillCard />
+          <button
+            onClick={() => {
+              navigate("/home/my-skills");
+            }}
+            style={{}}
+            className="see-all-btn"
+          >
+            See All Skills
+          </button>
         </div>
       </div>
     </div>

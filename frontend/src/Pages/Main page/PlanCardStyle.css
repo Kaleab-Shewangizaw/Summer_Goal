@@ -1,0 +1,157 @@
+.plan-card,
+.add-plan {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 32%;
+  min-width: 400px;
+  height: 200px;
+  padding: 30px;
+  background-color: #0c0c0c;
+  border-radius: 10px;
+  border: 1px solid #2c2c2c;
+  cursor: pointer;
+  margin-block: 20px;
+}
+
+.plan-card:hover {
+  transition: all 0.3s ease-in-out;
+}
+
+.plan-card .plan-card-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.plan-card .plan-card-header h2 {
+  font-size: 1.2rem;
+  color: #fff;
+  margin: 0;
+}
+
+.plan-card .plan-card-header p {
+  font-size: 1rem;
+  color: #aaa;
+  margin: 0;
+}
+
+.plan-card .plan-card-body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 20px;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.plan-card .plan-card-body p {
+  font-size: 1rem;
+  color: #aaa;
+  margin: 0;
+}
+
+.plan-card .plan-card-body p span {
+  font-weight: bold;
+  color: #8be3f9;
+  text-decoration: underline;
+}
+
+.plan-card .plan-card-footer {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.plan-card .plan-card-footer button {
+  background-color: #22f041ac;
+  color: #ffffff;
+  font-weight: 900;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.plan-card:hover .plan-card-footer button {
+  background-color: #50f669ac;
+  transition: all 0.3s ease-in-out;
+}
+
+.plan-card .plan-card-footer p {
+  font-size: 1rem;
+  color: #aaa;
+  margin: 0;
+}
+
+.plan-card .plan-card-footer p span {
+  color: #cdf0f9;
+}
+
+.my-plans h2,
+.section2 h2 {
+  margin-top: 40px;
+  margin-bottom: 0;
+}
+
+.my-plans-container,
+.section2 .planView {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  align-items: center;
+  margin-inline: auto; /* corrected from margininline */
+  width: 100%;
+
+  height: fit-content;
+  padding: 20px;
+  background-color: #0c0c0c;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.add-plan {
+  background-color: #0c0c0c;
+  border: 3px dashed #2c2c2c;
+  color: #aaa;
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+}
+.add-plan h2 {
+  font-size: 2rem;
+  color: #b1adad;
+  margin: 0;
+}
+
+.add-plan p {
+  font-size: 1rem;
+  color: #aaa;
+  margin: 0;
+}
+
+.add-plan h6 {
+  font-size: 1rem;
+  color: #aaa;
+}
+
+.add-plan:hover {
+  color: #50f669ac;
+  background-color: #1c1c1c;
+  border: 3px dashed #50f669ac;
+  transition: all 0.3s ease-in-out;
+}
+
+.my-skills .my-skill-container .add-plan:hover {
+  color: #50aef6ac;
+  border: 3px dashed #50aef6ac;
+}

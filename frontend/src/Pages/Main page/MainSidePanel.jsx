@@ -26,7 +26,7 @@ const MainSidePanel = () => {
         <div
           onClick={() => navigate("my-plans")}
           className={
-            window.location.pathname === "/home/my-plans" ? "active" : ""
+            window.location.pathname.includes("my-plans") ? "active" : ""
           }
         >
           <FaClipboardCheck /> My Plans
@@ -34,7 +34,7 @@ const MainSidePanel = () => {
         <div
           onClick={() => navigate("my-skills")}
           className={
-            window.location.pathname === "/home/my-skills" ? "active" : ""
+            window.location.pathname.includes("/home/my-skills") ? "active" : ""
           }
         >
           <IoIosRocket /> My Skills
@@ -48,7 +48,7 @@ const MainSidePanel = () => {
         <div
           onClick={() => navigate("profile")}
           className={
-            window.location.pathname === "/home/profile" ? "active" : ""
+            window.location.pathname.includes("/home/profile") ? "active" : ""
           }
         >
           <AiOutlineUser /> Profile
@@ -56,7 +56,7 @@ const MainSidePanel = () => {
         <div
           onClick={() => navigate("settings")}
           className={
-            window.location.pathname === "/home/settings" ? "active" : ""
+            window.location.pathname.includes("/home/settings") ? "active" : ""
           }
         >
           <IoMdSettings /> Settings

@@ -1,4 +1,5 @@
-.home {
+.home,
+.my-plans {
   font-family: "Inter", sans-serif;
 }
 
@@ -64,32 +65,26 @@
 
 .tracker {
   display: flex;
-  margin-top: 2rem;
+  margin-top: 3rem;
   align-items: flex-start;
   flex-wrap: wrap;
-  justify-content: space-around;
-
-  flex-wrap: wrap;
+  gap: 20px;
 }
 
 .tracker .tracker-c {
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  align-items: center;
-  width: 20%;
-  height: 100%;
+  align-items: flex-start;
   padding: 1rem;
-  margin-top: 1rem;
   gap: 1rem;
-  background-color: hsl(0, 0%, 0%);
+  background-color: hsl(311, 52%, 12%);
   width: 30%;
+  min-width: 400px;
+  margin-left: 1.5rem;
   height: 100%;
   padding: 1rem;
   border-radius: 8px;
-  border: 1px solid hsl(0, 0%, 20%);
-
-  min-width: fit-content;
 }
 
 .tracker .tracker-c h2 {
@@ -106,12 +101,12 @@
 .tracker .tracker-c p {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
   text-align: left;
   padding-left: 10px;
   font-size: 1rem;
-  color: hsl(0, 0%, 40%);
+  color: hsl(0, 0%, 54%);
   font-weight: 300;
   flex-wrap: wrap;
 }
@@ -119,17 +114,64 @@
 .tracker .tracker-c p span {
   display: flex;
   gap: 0.5rem;
-  width: 100%;
   font-weight: 700;
   color: hsl(0, 0%, 98%);
 }
 
 .tracker .tracker-c p span.percent {
   text-decoration: none;
-  color: hsl(72, 79%, 50%);
+  color: hsl(106, 88%, 52%);
   margin-left: 3rem;
 }
-.tracker .tracker-c p span.percent:hover {
+
+.see-all-btn {
+  background-color: #d819f5;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
   cursor: pointer;
-  text-decoration: underline;
+  font-size: 1rem;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.see-all-btn:hover {
+  cursor: pointer;
+  background-color: #b30f9e;
+}
+
+.pin {
+  position: absolute;
+  right: 1%;
+  top: 1%;
+  font-size: 1.5rem;
+  width: fit-content;
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.5s;
+}
+
+.pin:hover {
+  cursor: pointer;
+}
+
+.pinned {
+  color: hsl(0, 99%, 58%);
+  font-size: 2rem;
+  transform: rotateY(180deg);
+  transform: rotatez(-45deg);
+  transition: color 0.3s ease;
+  transition: transform 0.5s;
+}
+
+.skill-card .skill-card-footer .btn {
+  background-color: #006ba9;
+}
+
+.skill-card:hover .skill-card-footer .btn {
+  background-color: #1290d9;
 }
