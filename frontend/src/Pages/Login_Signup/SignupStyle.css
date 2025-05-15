@@ -2,14 +2,14 @@
   display: flex;
   height: 900px;
   margin-top: 20px;
-  width: 99%;
-  gap: 5px;
+  width: 70%;
+  gap: 10px;
   margin-inline: auto;
 }
 
 .left-c {
   padding-block: 5%;
-  width: 40%;
+  width: 60%;
   background-color: #181e1a;
   display: flex;
   flex-direction: column;
@@ -129,7 +129,7 @@
 }
 
 .right-c {
-  width: 60%;
+  width: 40%;
   display: flex;
   height: 100%;
 }

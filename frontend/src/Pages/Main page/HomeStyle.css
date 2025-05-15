@@ -1,0 +1,124 @@
+.home {
+  font-family: "Inter", sans-serif;
+}
+
+.home-banner {
+}
+
+.home-banner .home-banner-text h1 {
+  font-size: 1.7rem;
+  color: hsl(0, 1%, 58%);
+  font-weight: 400;
+  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.home-banner .home-banner-text p {
+  font-size: 1.2rem;
+  color: hsl(0, 0%, 40%);
+  font-weight: 300;
+}
+.date-view,
+.date-view div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 1rem;
+}
+
+.date-view h2 {
+  font-size: 1.5rem;
+  color: hsl(0, 0%, 92%);
+  font-weight: 400;
+  justify-self: start;
+  margin-bottom: 0.5rem;
+}
+
+.date-view p {
+  background-color: black;
+  width: fit-content;
+  padding: 0.4rem 0.8rem;
+  color: white;
+  border-radius: 0 0.5rem 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 400;
+  border-left: 5px solid hsl(0, 79%, 50%);
+}
+
+.date-view p:hover {
+  cursor: default;
+  background-color: hsl(0, 0%, 5%);
+}
+
+.date-view p span {
+  font-weight: 700;
+  color: hsl(0, 0%, 98%);
+}
+
+.date-view p span.percent {
+  text-decoration: none;
+  color: hsl(72, 79%, 50%);
+}
+
+.tracker {
+  display: flex;
+  margin-top: 2rem;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  gap: 1rem;
+}
+
+.tracker .tracker-c {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 20%;
+  height: 100%;
+  padding: 1rem;
+  margin-top: 1rem;
+  gap: 1rem;
+  background-color: hsl(0, 0%, 0%);
+  width: 30%;
+  height: 100%;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.tracker .tracker-c h2 {
+  color: hsl(0, 0%, 92%);
+  font-weight: 400;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.tracker .tracker-c p {
+  width: 100%;
+  text-align: left;
+  padding-left: 10px;
+  font-size: 1rem;
+  color: hsl(0, 0%, 40%);
+  font-weight: 300;
+}
+
+.tracker .tracker-c p span {
+  font-weight: 700;
+  color: hsl(0, 0%, 98%);
+}
+
+.tracker .tracker-c p span.percent {
+  text-decoration: none;
+  color: hsl(72, 79%, 50%);
+  margin-left: 3rem;
+}
+.tracker .tracker-c p span.percent:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}

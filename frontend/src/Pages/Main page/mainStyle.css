@@ -1,0 +1,13 @@
+main::-webkit-scrollbar {
+  width: 5px;
+  background: transparent;
+  margin-left: 10px; /* make scrollbar transparent */
+}
+main::-webkit-scrollbar-thumb {
+  background: rgba(81, 81, 81, 0.5);
+  border-radius: 10px;
+}
+
+main::-webkit-scrollbar-thumb:hover {
+  background: rgba(81, 81, 81, 0.8);
+}
