@@ -1,7 +1,9 @@
 import React from "react";
 import { TiPin } from "react-icons/ti";
+import { useNavigate } from "react-router-dom";
 
 const SkillCard = () => {
+  const navigate = useNavigate();
   const [pin, setPin] = React.useState(false);
   const onPinClick = () => {
     setPin(!pin);
@@ -24,7 +26,14 @@ const SkillCard = () => {
         <p>
           <span>Started at:</span> 2025-4-01
         </p>
-        <button className="btn">View Details</button>
+        <button
+          className="btn"
+          onClick={() => {
+            navigate("/home/my-skills/12");
+          }}
+        >
+          View Details
+        </button>
       </div>
     </div>
   );

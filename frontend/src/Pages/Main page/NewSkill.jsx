@@ -1,16 +1,15 @@
-import React, { useState } from "react";
-import "./NewPlan.css";
+import React from "react";
 import { TiPin } from "react-icons/ti";
 
-const NewPlan = () => {
-  const [pin, setIsPinned] = useState(false);
+const NewSkill = () => {
+  const [pin, setIsPinned] = React.useState(false);
 
   const onPinClick = () => {
     setIsPinned(!pin);
   };
 
   return (
-    <div className="plan-page new-plan">
+    <div className="plan-page new-plan new-skill">
       <img
         src="https://picsum.photos/1200/250"
         alt="Banner"
@@ -22,14 +21,14 @@ const NewPlan = () => {
           style={{ cursor: "pointer" }}
           onClick={onPinClick}
         />
-        <h2>New Plan</h2>
+        <h2>New Skill</h2>
         <form action="">
-          <label htmlFor="plan-title">Plan Title:</label>
+          <label htmlFor="plan-title">Skill Name:</label>
           <input
             type="text"
             name=""
             id="plan-title"
-            placeholder="Enter your plan here..."
+            placeholder="Enter your skill here..."
             // limit to 15 character
             maxLength={30}
           />
@@ -37,12 +36,11 @@ const NewPlan = () => {
           <textarea
             name=""
             id="plan-desc"
-            placeholder="Describe your plan here..."
+            placeholder="Describe your skill here..."
           ></textarea>
-          <label htmlFor="plan-num">Number of Times:</label>
-          <input type="number" name="" id="plan-num" placeholder="10" />
+
           <button type="submit" className="mark-done-btn">
-            Add Plan
+            Add Skill
           </button>
         </form>
       </div>
@@ -50,4 +48,4 @@ const NewPlan = () => {
   );
 };
 
-export default NewPlan;
+export default NewSkill;

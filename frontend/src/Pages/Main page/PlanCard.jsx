@@ -17,7 +17,7 @@ const PlanCard = () => {
           style={{ cursor: "pointer" }}
           onClick={onPinClick}
         />
-        <h2>Plan Title </h2>
+        <h2>Plan Title</h2>
         <p>progress: 50%</p>
       </div>
       <div className="plan-card-body">

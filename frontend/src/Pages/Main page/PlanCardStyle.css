@@ -69,7 +69,7 @@
 }
 
 .plan-card .plan-card-footer button {
-  background-color: #22f041ac;
+  background-color: #22f04152;
   color: #ffffff;
   font-weight: 900;
   border: none;
@@ -80,7 +80,7 @@
 }
 
 .plan-card:hover .plan-card-footer button {
-  background-color: #50f669ac;
+  background-color: #50f6695c;
   transition: all 0.3s ease-in-out;
 }
 

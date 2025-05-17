@@ -6,7 +6,7 @@
 .plan-page-content {
   width: 50%;
   min-width: 500px;
-  border: 1px solid white;
+  border: 1px solid hsl(0, 0%, 40%);
   margin-inline: auto;
   margin-top: 3rem;
   display: flex;
@@ -18,23 +18,41 @@
 
 .plan-page-content .deleteEdit-btn {
   position: absolute;
-  top: 5%;
+  top: 2%;
   right: 5%;
   display: flex;
   gap: 40px;
   font-size: 1.5rem;
+  color: hsl(0, 0%, 58%);
 }
 
 .plan-page-content h2 {
+  margin-top: 0;
   text-align: center;
   font-weight: 400;
+  margin-bottom: 0;
 }
 
 .plan-page-content p {
   margin-top: 2rem;
+  font-size: 1.1rem;
+  text-align: left;
   display: flex;
   flex-direction: column;
   gap: 5px;
+  margin-bottom: 10px;
+}
+
+.plan-page-content h3 {
+  font-size: 1rem;
+  color: hsl(0, 0%, 67%);
+  margin-block: 0;
+  text-align: right;
+}
+
+.plan-page-content h3 span {
+  font-weight: 700;
+  color: hsl(50, 98%, 48%);
 }
 
 .plan-page-content p span {
@@ -42,13 +60,14 @@
 }
 
 .plan-comments {
-  margin-block: 1rem;
+  margin-top: 1rem;
   height: 400px;
-  width: 500px;
+  width: 80%;
   margin-inline: auto;
-  border-radius: 8px;
+  border-radius: 8px 8px 0 0;
   overflow-y: auto;
-  background-color: rgba(173, 213, 249, 0.2);
+  border: 1px solid hsl(0, 0%, 40%);
+  border-bottom: none;
 }
 
 .plan-comments::-webkit-scrollbar {
@@ -56,8 +75,12 @@
   width: 5px;
 }
 
+.plan-comments::-webkit-scrollbar-thumb {
+  background-color: hsl(0, 0%, 58%);
+}
+
 .comment {
-  background-color: black;
+  background-color: #0d1117;
   display: flex;
   flex-direction: column;
   height: fit-content;
@@ -85,6 +108,68 @@
   justify-content: space-around;
 }
 
+.add-comment {
+  display: flex;
+  height: fit-content;
+  width: 80%;
+  margin-inline: auto;
+  align-items: center;
+  border: 1px solid hsl(0, 0%, 40%);
+
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+}
+
+.add-comment button {
+  background-color: transparent;
+  color: hsl(0, 0%, 98%);
+  border: 1px solid hsl(0, 0%, 40%);
+  border-radius: 50%;
+  font-weight: 900;
+  font-size: 2rem;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0;
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+.add-comment button:hover {
+  cursor: pointer;
+  background-color: #0d1117;
+}
+
+.plan-page-content textarea {
+  width: 100%;
+  height: 90px;
+  margin-inline: auto;
+  border: none;
+  resize: none;
+  padding: 1rem;
+  background-color: transparent;
+  color: hsl(0, 0%, 98%);
+  font-size: larger;
+  margin-bottom: 0;
+}
+
+.plan-page-content textarea::-webkit-scrollbar {
+  width: 5px;
+  background-color: transparent;
+  color: hsl(0, 0%, 40%);
+}
+
+.plan-page-content textarea::-webkit-scrollbar-thumb {
+  background-color: hsl(0, 0%, 40%);
+  border-radius: 10px;
+}
+
+.plan-page-content textarea:focus {
+  outline: none;
+}
+
 .trash:hover {
   cursor: pointer;
   color: rgb(253, 95, 95);
@@ -93,4 +178,47 @@
 .edit:hover {
   cursor: pointer;
   color: rgb(161, 253, 95);
+}
+.share:hover {
+  color: rgb(95, 155, 253);
+  cursor: pointer;
+}
+
+.mark-done-btn {
+  height: 40px;
+  margin-top: 1rem;
+  width: 50%;
+  margin-inline: auto;
+  border-radius: 8px;
+  background-color: #0f8f1a;
+  color: white;
+  font-size: 1.5rem;
+  font-weight: 500;
+  border: none;
+}
+
+.mark-done-btn:hover {
+  cursor: pointer;
+  background-color: #06be25;
+  transition: background-color 0.3s ease;
+}
+
+.skill-page .mark-done-btn,
+.new-skill form button {
+  background-color: #1539bb;
+}
+
+.skill-page .pro {
+  color: #f43f27;
+}
+
+.skill-page .done {
+  color: #05d41d;
+}
+
+.skill-page .mark-done-btn:hover,
+.new-skill form button:hover {
+  cursor: pointer;
+  background-color: #032d7b;
+  transition: background-color 0.3s ease;
 }

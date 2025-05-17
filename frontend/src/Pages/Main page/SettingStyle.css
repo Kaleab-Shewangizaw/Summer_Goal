@@ -1,0 +1,17 @@
+.setting .setting-content button {
+  width: 100px;
+  height: 40px;
+  margin: 5px;
+  padding: 10px;
+  background-color: #304848;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.setting .setting-content button:hover {
+  background-color: #2a3b3b;
+}

@@ -1,11 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import { BsArrowUp, BsShare, BsShareFill } from "react-icons/bs";
 import { FaEdit, FaShare, FaTrash } from "react-icons/fa";
-import "./PlanPage.css";
-import { BsArrowUp } from "react-icons/bs";
 
-const PlanPage = () => {
+import "./PlanPage.css";
+const SkillPage = () => {
+  const [isDone, setIsDone] = useState(false);
   return (
-    <div className="plan-page">
+    <div className="skill-page plan-page">
       <img
         src="https://picsum.photos/1200/250"
         alt="Banner"
@@ -17,9 +18,12 @@ const PlanPage = () => {
           <FaShare className="share" />
           <FaTrash className="trash" />
         </div>
-        <h2>PlanPageGoesHer</h2>
+        <h2>Plan Title</h2>
         <h3>
-          Progress: <span>40%</span> [4/10]
+          Progress:{" "}
+          <span className={isDone ? "done pro" : "pro"}>
+            {isDone ? "Accomplished" : "Pending..."}
+          </span>
         </h3>
         <p>
           <span>Description</span>
@@ -49,10 +53,17 @@ const PlanPage = () => {
           </button>
         </div>
 
-        <button className="mark-done-btn">Mark Done</button>
+        <button
+          onClick={() => {
+            setIsDone(!isDone);
+          }}
+          className="mark-done-btn"
+        >
+          Mark Done
+        </button>
       </div>
     </div>
   );
 };
 
-export default PlanPage;
+export default SkillPage;

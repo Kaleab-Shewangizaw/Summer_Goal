@@ -9,6 +9,11 @@ import Home from "./Pages/Main page/Home";
 import MyPlans from "./Pages/Main page/MyPlans";
 import MySkills from "./Pages/Main page/MySkills";
 import PlanPage from "./Pages/Main page/PlanPage";
+import SkillPage from "./Pages/Main page/SkillPage";
+import NewPlan from "./Pages/Main page/NewPlan";
+import NewSkill from "./Pages/Main page/NewSkill";
+import Profile from "./Pages/Main page/Profile";
+import Setting from "./Pages/Main page/Setting";
 
 function App() {
   return (
@@ -18,13 +23,15 @@ function App() {
       <Route path="/signup" element={<Signup />} />
       <Route path="/home" element={<MainLayout />}>
         <Route path="" element={<Home />} />
-        <Route path="profile" element={<h1>Profile</h1>} />
-        <Route path="settings" element={<h1>Settings</h1>} />
+        <Route path="profile" element={<Profile />} />
+        <Route path="settings" element={<Setting />} />
         <Route path="my-plans" element={<MyPlans />} />
         <Route path="my-plans/:id" element={<PlanPage />} />
-        {/* the error here is:  */}
+        <Route path="my-plans/new" element={<NewPlan />} />
         <Route path="my-skills" element={<MySkills />} />
-        <Route path="blog" element={<h1>Blog</h1>} />
+        <Route path="my-skills/:id" element={<SkillPage />} />
+        <Route path="my-skills/new" element={<NewSkill />} />
+        <Route path="blog" element={<p>Coming soon...</p>} />
       </Route>
       <Route path="*" element={<h1>404 Not Found</h1>} />
     </Routes>
