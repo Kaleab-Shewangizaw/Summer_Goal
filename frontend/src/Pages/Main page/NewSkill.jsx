@@ -23,7 +23,9 @@ const NewSkill = () => {
         />
         <h2>New Skill</h2>
         <form action="">
-          <label htmlFor="plan-title">Skill Name:</label>
+          <p>
+            <span>Name</span>
+          </p>
           <input
             type="text"
             name=""
@@ -32,7 +34,9 @@ const NewSkill = () => {
             // limit to 15 character
             maxLength={30}
           />
-          <label htmlFor="plan-desc">Description:</label>
+          <p>
+            <span>Description</span>
+          </p>
           <textarea
             name=""
             id="plan-desc"
@@ -40,7 +44,7 @@ const NewSkill = () => {
           ></textarea>
 
           <button type="submit" className="mark-done-btn">
-            Add Skill
+            Add skill
           </button>
         </form>
       </div>

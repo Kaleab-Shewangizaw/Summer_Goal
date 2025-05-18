@@ -1,6 +1,8 @@
 import React from "react";
 import "./ProfileStyle.css";
+import { useNavigate } from "react-router-dom";
 const Profile = () => {
+  const navigate = useNavigate();
   return (
     <div className="plan-page new-plan profile">
       <img
@@ -41,7 +43,14 @@ const Profile = () => {
             coming soon...
           </p>
         </div>
-        <button className="profile-edit-btn">Edit</button>
+        <button
+          className="profile-edit-btn"
+          onClick={() => {
+            navigate("/home/profile/123/Edit-Profile");
+          }}
+        >
+          Edit
+        </button>
       </div>
     </div>
   );

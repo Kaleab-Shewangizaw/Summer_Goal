@@ -1,0 +1,28 @@
+.edit-profile input {
+  width: 50%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: black;
+  color: rgb(204, 204, 204);
+  font-size: 1.2rem;
+  border: none;
+  outline: none;
+}
+
+.edit-profile input:focus {
+  border: 1px solid #454645;
+}
+
+.edit-profile textarea {
+  width: 50%;
+  padding: 10px;
+  margin: 5px 0;
+  outline: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: black;
+  color: rgb(204, 204, 204);
+  border: none;
+  outline: none;
+}

@@ -1,7 +1,6 @@
 .new-plan form {
   width: 80%;
   margin-inline: auto;
-
   display: flex;
   flex-direction: column;
   align-items: right;
@@ -11,41 +10,31 @@
   position: relative;
 }
 
-.new-plan form label {
-  font-size: 1.5rem;
-  color: rgb(195, 195, 195);
-  margin-block: 10px;
-}
-
-.new-plan form #plan-title {
+.new-plan form input {
   height: 50px;
   font-size: 1.2rem;
   font-weight: 300;
   outline: none;
   border: none;
-  background-color: #1f1f1f;
-  color: rgb(217, 217, 217);
+  background-color: #000000;
+  color: rgb(203, 203, 203);
   padding: 1rem;
   border-radius: 8px;
   margin-bottom: 20px;
 }
 
+.new-plan form input:focus {
+  border: 1px solid #454645;
+}
+
 .new-plan form textarea {
-  background-color: #1f1f1f;
+  background-color: #000000;
   font-size: 1.1rem;
   border-radius: 8px;
   resize: vertical;
   height: 300px;
 }
 
-.new-plan #plan-num {
-  height: 40px;
-  font-size: 1.2rem;
-  width: 100%;
-  border: none;
-  background-color: #1f1f1f;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  color: aliceblue;
-  outline: none;
+.new-plan form textarea:focus {
+  border: 1px solid #454645;
 }

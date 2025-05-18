@@ -190,7 +190,7 @@
   width: 50%;
   margin-inline: auto;
   border-radius: 8px;
-  background-color: #0f8f1a;
+  background-color: #0f8f1ab4;
   color: white;
   font-size: 1.5rem;
   font-weight: 500;
@@ -199,13 +199,13 @@
 
 .mark-done-btn:hover {
   cursor: pointer;
-  background-color: #06be25;
+  background-color: #26e14586;
   transition: background-color 0.3s ease;
 }
 
 .skill-page .mark-done-btn,
 .new-skill form button {
-  background-color: #1539bb;
+  background-color: #1539bb80;
 }
 
 .skill-page .pro {
@@ -219,6 +219,6 @@
 .skill-page .mark-done-btn:hover,
 .new-skill form button:hover {
   cursor: pointer;
-  background-color: #032d7b;
+  background-color: #032d7b7a;
   transition: background-color 0.3s ease;
 }

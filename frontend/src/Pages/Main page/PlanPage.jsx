@@ -2,8 +2,11 @@ import React from "react";
 import { FaEdit, FaShare, FaTrash } from "react-icons/fa";
 import "./PlanPage.css";
 import { BsArrowUp } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
+import ContributionGrid from "./ContributionGrid";
 
 const PlanPage = () => {
+  const navigate = useNavigate();
   return (
     <div className="plan-page">
       <img
@@ -13,7 +16,12 @@ const PlanPage = () => {
       />
       <div className="plan-page-content">
         <div className="deleteEdit-btn">
-          <FaEdit className="edit" />
+          <FaEdit
+            className="edit"
+            onClick={() => {
+              navigate("/home/my-plans/12/edit-plan");
+            }}
+          />
           <FaShare className="share" />
           <FaTrash className="trash" />
         </div>
@@ -21,6 +29,7 @@ const PlanPage = () => {
         <h3>
           Progress: <span>40%</span> [4/10]
         </h3>
+        <ContributionGrid />
         <p>
           <span>Description</span>
           watching 10 movies in 10 days: movies: 1. The Shawshank Redemption 2.

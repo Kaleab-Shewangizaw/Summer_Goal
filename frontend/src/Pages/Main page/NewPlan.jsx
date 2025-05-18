@@ -24,7 +24,9 @@ const NewPlan = () => {
         />
         <h2>New Plan</h2>
         <form action="">
-          <label htmlFor="plan-title">Plan Title:</label>
+          <p>
+            <span>Plan Title</span>
+          </p>
           <input
             type="text"
             name=""
@@ -33,13 +35,17 @@ const NewPlan = () => {
             // limit to 15 character
             maxLength={30}
           />
-          <label htmlFor="plan-desc">Description:</label>
+          <p>
+            <span>Description</span>
+          </p>
           <textarea
             name=""
             id="plan-desc"
             placeholder="Describe your plan here..."
           ></textarea>
-          <label htmlFor="plan-num">Number of Times:</label>
+          <p>
+            <span>Progress</span>
+          </p>
           <input type="number" name="" id="plan-num" placeholder="10" />
           <button type="submit" className="mark-done-btn">
             Add Plan

@@ -15,3 +15,24 @@
 .setting .setting-content button:hover {
   background-color: #2a3b3b;
 }
+
+.setting .contact-btns button {
+  font-size: 1.3rem;
+
+  background-color: #000000;
+  color: rgb(203, 203, 203);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 5px;
+  transition: background-color 0.3s ease;
+}
+.setting .contact-btns button:hover {
+  background-color: #2a3b3b;
+}
+
+#feedback {
+  border: 1px solid #7475754e;
+  border-radius: 8px;
+}

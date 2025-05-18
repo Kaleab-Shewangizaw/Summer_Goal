@@ -3,8 +3,11 @@ import { BsArrowUp, BsShare, BsShareFill } from "react-icons/bs";
 import { FaEdit, FaShare, FaTrash } from "react-icons/fa";
 
 import "./PlanPage.css";
+import { useNavigate } from "react-router-dom";
+
 const SkillPage = () => {
   const [isDone, setIsDone] = useState(false);
+  const navigate = useNavigate();
   return (
     <div className="skill-page plan-page">
       <img
@@ -14,11 +17,16 @@ const SkillPage = () => {
       />
       <div className="plan-page-content">
         <div className="deleteEdit-btn">
-          <FaEdit className="edit" />
+          <FaEdit
+            onClick={() => {
+              navigate("/home/my-skills/12/edit-skill");
+            }}
+            className="edit"
+          />
           <FaShare className="share" />
           <FaTrash className="trash" />
         </div>
-        <h2>Plan Title</h2>
+        <h2>Skill Name</h2>
         <h3>
           Progress:{" "}
           <span className={isDone ? "done pro" : "pro"}>

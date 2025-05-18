@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import "./HomeStyle.css";
 import {
@@ -13,8 +13,11 @@ import PlanCard from "./PlanCard";
 import { CiNoWaitingSign } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import SkillCard from "./SkillCard";
+import { UserContext } from "../../utils/AuthContext";
 
 const Home = () => {
+  const { user, setUser } = useContext(UserContext);
+
   const navigate = useNavigate();
   function getDaysLeft() {
     const today = new Date();
@@ -45,7 +48,7 @@ const Home = () => {
         />
         <div className="home-banner-text">
           <h1>My summer Planner</h1>
-          <p>Plan your summer activities and adventures!</p>
+          <p>{user.username}</p>
         </div>
       </div>
       <div className="date-view">

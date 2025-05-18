@@ -1,14 +1,55 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./SignupStyle.css";
 import { useNavigate } from "react-router-dom";
 import SignUpImg from "../LandingPage/images/signup.png";
 
+import { UserContext } from "../../utils/AuthContext";
+
 const Signup = () => {
   const [isShowen, setIsShowen] = React.useState(false);
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [error, setError] = React.useState(null);
   const showPassword = () => {
     setIsShowen(!isShowen);
   };
   const navigate = useNavigate();
+
+  const [navigateTo, setNavigateTo] = React.useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const ress = await fetch("http://localhost:5000/api/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        username: name,
+        email,
+        password,
+      }),
+    });
+
+    const data = await ress.json();
+
+    if (!data.success) {
+      setError("wrong credentials");
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
+      return;
+    }
+    setNavigateTo(true);
+  };
+
+  useEffect(() => {
+    if (navigateTo) {
+      navigate("/login");
+    }
+  }, [navigateTo]);
+
   return (
     <div className="signup">
       <div className="left-c">
@@ -19,17 +60,38 @@ const Signup = () => {
           <h2>Welcome!</h2>
           <p>Ready to Plan Your Rainy Season? Let’s Make This Season Count!</p>
           <form>
-            <input type="text" placeholder="Username" required />
-            <input type="email" placeholder="Email" required />
+            <input
+              type="text"
+              placeholder="Username"
+              required
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+              }}
+            />
+            <input
+              type="email"
+              placeholder="Email"
+              required
+              value={email}
+              onChange={(e) => {
+                setEmail(e.target.value);
+              }}
+            />
             <div className="show-password">
               <input
                 type={isShowen ? "text" : "password"}
                 placeholder="Password"
                 required
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
               />
               <span onClick={showPassword}>{isShowen ? "Hide" : "Show"}</span>
             </div>
-            <button type="submit">Create an account</button>
+            {error && <p style={{ color: "red", fontSize: "12px" }}>{error}</p>}
+            <button onClick={handleSubmit}>Create an account</button>
           </form>
           <p>or continue with:</p>
           <div className="social-login">
