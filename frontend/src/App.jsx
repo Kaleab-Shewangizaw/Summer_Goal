@@ -17,7 +17,7 @@ import Setting from "./Pages/Main page/Setting";
 import EditProfile from "./Pages/Main page/EditProfile";
 import EditPlan from "./Pages/Main page/EditPlan";
 import EditSkill from "./Pages/Main page/EditSkill";
-import ProtectedRoute from "./utils/ProtectedRoute"; // import this
+import ProtectedRoute from "./utils/ProtectedRoute";
 import { UserContext } from "./utils/AuthContext";
 import { useContext } from "react";
 

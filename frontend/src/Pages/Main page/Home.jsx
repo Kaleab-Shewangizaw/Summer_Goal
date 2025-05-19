@@ -16,9 +16,26 @@ import SkillCard from "./SkillCard";
 import { UserContext } from "../../utils/AuthContext";
 
 const Home = () => {
-  const { user, setUser } = useContext(UserContext);
-
   const navigate = useNavigate();
+  const { user, userInfo, setUserInfo } = useContext(UserContext);
+  const { id } = user;
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const res = await fetch(`http://localhost:5000/api/auth/profile/${id}`);
+        const data = await res.json();
+
+        setUserInfo(data.userInfo);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    if (id) fetchUserData();
+  }, [id]);
+
+  // 🚨 This prevents rendering anything until userInfo is ready
+
   function getDaysLeft() {
     const today = new Date();
     const year =
@@ -37,7 +54,7 @@ const Home = () => {
     }, 86400000);
     return () => clearInterval(interval);
   }, []);
-
+  if (!userInfo) return null;
   return (
     <div className="home">
       <div className="home-banner">
@@ -48,7 +65,9 @@ const Home = () => {
         />
         <div className="home-banner-text">
           <h1>My summer Planner</h1>
-          <p>{user.username}</p>
+          <p>
+            <span>{userInfo.username}'s</span> summer planner{" "}
+          </p>
         </div>
       </div>
       <div className="date-view">
@@ -137,10 +156,14 @@ const Home = () => {
       <div className="section2">
         <h2>Next Plan</h2>
         <div className="planView">
-          <PlanCard />
-          <PlanCard />
-          <PlanCard />
-          <PlanCard />
+          {(() => {
+            const pinnedPlans = userInfo?.plans?.filter(
+              (plan) => plan.isPinned
+            );
+            return pinnedPlans.map((plan) => (
+              <PlanCard key={plan.id} plan={plan} />
+            ));
+          })()}
           <button
             onClick={() => {
               navigate("/home/my-plans");
@@ -156,11 +179,14 @@ const Home = () => {
       <div className="section2">
         <h2>Next Skill</h2>
         <div className="planView">
-          <SkillCard />
-          <SkillCard />
-          <SkillCard />
-          <SkillCard />
-          <SkillCard />
+          {(() => {
+            const pinnedSkills = userInfo?.skills?.filter(
+              (skill) => skill.isPinned
+            );
+            return pinnedSkills.map((skill) => (
+              <SkillCard key={skill.id} plan={skill} />
+            ));
+          })()}
           <button
             onClick={() => {
               navigate("/home/my-skills");

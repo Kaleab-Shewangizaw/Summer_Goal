@@ -19,19 +19,12 @@ const getIntensityColor = (count) => {
   return colors[0];
 };
 
-const ContributionGrid = () => {
-  // data: { "2025-05-15": 1, "2025-05-16": 2, ... }
-  // Example data for testing
-  const data = {
-    "2025-05-01": 10,
-    "2025-05-13": 3,
-    "2025-05-14": 2,
-    "2025-05-15": 1,
-    "2025-05-16": 2,
-    "2025-05-17": 3,
-    "2025-05-18": 4,
-    "2025-05-19": 5,
-  };
+const ContributionGrid = (props) => {
+  let data = {};
+  props.data?.forEach((item) => {
+    data[item.date.slice(0, 10)] = item.count;
+  });
+
   const today = new Date();
   const days = 7 * 15; // 15 weeks (364 days)
 
@@ -54,7 +47,23 @@ const ContributionGrid = () => {
   return (
     <div className="contribution-grid-container">
       <div className="contribution-grid">{squares}</div>
-      <p>plan achivement Overview [past 100 days]</p>
+      <p style={{ textAlign: "center" }}>plan overview [past 100 days]</p>
+      <p style={{ textAlign: "center", fontWeight: "bold" }}>
+        Total Contributions:{" "}
+        {props.data?.reduce((acc, item) => acc + item.count, 0) || 0}
+      </p>
+      {/* total active days */}
+      <p style={{ textAlign: "center", fontWeight: "bold" }}>
+        Total Active Days:{" "}
+        {props.data?.filter((item) => item.count > 0).length || 0}
+      </p>
+      <p style={{ textAlign: "center", fontWeight: "bold" }}>
+        Average Contributions per Day:{" "}
+        {(
+          props.data?.reduce((acc, item) => acc + item.count, 0) /
+          (props.data?.length || 1)
+        ).toFixed(2) || 0}
+      </p>
     </div>
   );
 };

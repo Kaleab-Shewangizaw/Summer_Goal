@@ -1,12 +1,46 @@
-import React, { useState } from "react";
 import "./NewPlan.css";
 import { TiPin } from "react-icons/ti";
+import { UserContext } from "../../utils/AuthContext";
+import { useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 
 const NewPlan = () => {
+  const navigate = useNavigate();
   const [pin, setIsPinned] = useState(false);
-
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const [target, setTarget] = useState();
+  const [error, setError] = useState(null);
+  const { user } = useContext(UserContext);
   const onPinClick = () => {
     setIsPinned(!pin);
+  };
+
+  const createPlan = async (e) => {
+    e.preventDefault();
+    const res = await fetch(
+      `http://localhost:5000/api/plan/create/${user.id}`,
+      {
+        // Fixed missing comma
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          title,
+          description: desc,
+          pinned: pin,
+          target,
+        }),
+      }
+    );
+    const data = await res.json();
+    if (!data.success) {
+      setError(data.message || "something went wrong, try again!");
+      return;
+    }
+    navigate("/home/my-plans");
   };
 
   return (
@@ -23,7 +57,7 @@ const NewPlan = () => {
           onClick={onPinClick}
         />
         <h2>New Plan</h2>
-        <form action="">
+        <form action="" onSubmit={createPlan}>
           <p>
             <span>Plan Title</span>
           </p>
@@ -32,7 +66,10 @@ const NewPlan = () => {
             name=""
             id="plan-title"
             placeholder="Enter your plan here..."
-            // limit to 15 character
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
             maxLength={30}
           />
           <p>
@@ -42,11 +79,26 @@ const NewPlan = () => {
             name=""
             id="plan-desc"
             placeholder="Describe your plan here..."
+            value={desc}
+            onChange={(e) => {
+              setDesc(e.target.value);
+            }}
           ></textarea>
           <p>
-            <span>Progress</span>
+            <span>Count</span>
           </p>
-          <input type="number" name="" id="plan-num" placeholder="10" />
+          <input
+            type="number"
+            name=""
+            id="plan-num"
+            placeholder="10"
+            required
+            value={target}
+            onChange={(e) => {
+              setTarget(e.target.value);
+            }}
+          />
+          {error && <p>{error}</p>}
           <button type="submit" className="mark-done-btn">
             Add Plan
           </button>

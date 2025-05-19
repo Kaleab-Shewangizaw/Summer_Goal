@@ -4,8 +4,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import AuthRoute from "./routes/auth.route.js";
 import connectDB from "./utils/connectDB.js";
-import jwt from "jsonwebtoken";
-import User from "./models/user.model.js";
+import PlanRoute from "./routes/plan.route.js";
 
 dotenv.config();
 
@@ -15,7 +14,8 @@ app.use(cookieParser());
 
 app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 
-app.use("/api", AuthRoute);
+app.use("/api/auth", AuthRoute);
+app.use("/api/plan", PlanRoute);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, connectDB);

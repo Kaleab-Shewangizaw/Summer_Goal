@@ -7,7 +7,6 @@ const planSchema = mongoose.Schema({
   },
   description: {
     type: String,
-    required: true,
   },
   target: {
     type: Number,
@@ -23,7 +22,12 @@ const planSchema = mongoose.Schema({
   },
   comments: [
     {
-      _id: { type: mongoose.Schema.Types.ObjectId, auto: true },
+      // here I need unique id for each comment and automatically generated
+      // by mongoose
+      _id: {
+        type: mongoose.Schema.Types.ObjectId,
+        default: () => new mongoose.Types.ObjectId(),
+      },
       text: { type: String, required: true },
       createdAt: { type: Date, default: Date.now },
     },

@@ -21,6 +21,23 @@ export const getProfile = async (req, res) => {
   });
 };
 
+export const getProfileWithId = async (req, res) => {
+  const { id } = req.params;
+  const _id = id;
+  try {
+    const user = await User.findOne({ _id });
+    if (!user) {
+      return res.json({ success: false, message: "404 User not Found" });
+    }
+    const { password, ...otherInfo } = user._doc;
+    return res.status(200).json({ success: true, userInfo: otherInfo });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Server error", error: err });
+  }
+};
+
 export function signup(req, res) {
   const { username, email, password } = req.body;
   if (!username || !email || !password) {

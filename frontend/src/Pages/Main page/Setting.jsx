@@ -10,7 +10,7 @@ const Setting = () => {
   const navigate = useNavigate();
   const [navigateTo, setNavigateTo] = React.useState(false);
   const handleLogout = async () => {
-    await fetch("http://localhost:5000/api/logout", {
+    await fetch("http://localhost:5000/api/auth/logout", {
       method: "POST",
       credentials: "include",
     });

@@ -4,8 +4,9 @@ export const UserContext = createContext({});
 
 export const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [userInfo, setUserInfo] = useState(null);
   useEffect(() => {
-    fetch("http://localhost:5000/api/profile", {
+    fetch("http://localhost:5000/api/auth/profile", {
       method: "GET",
       credentials: "include",
     })
@@ -13,7 +14,6 @@ export const UserContextProvider = ({ children }) => {
       .then((data) => {
         if (data.userData) {
           setUser(data.userData);
-          console.log("User data:", data.userData);
         } else {
           setUser(null);
         }
@@ -23,7 +23,7 @@ export const UserContextProvider = ({ children }) => {
       });
   }, []);
   return (
-    <UserContext.Provider value={{ user, setUser }}>
+    <UserContext.Provider value={{ user, setUser, userInfo, setUserInfo }}>
       {children}
     </UserContext.Provider>
   );
