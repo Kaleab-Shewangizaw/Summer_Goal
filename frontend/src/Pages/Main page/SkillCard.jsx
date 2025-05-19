@@ -2,34 +2,36 @@ import React from "react";
 import { TiPin } from "react-icons/ti";
 import { useNavigate } from "react-router-dom";
 
-const SkillCard = () => {
+const SkillCard = (props) => {
+  const { skill } = props;
   const navigate = useNavigate();
   const [pin, setPin] = React.useState(false);
   const onPinClick = () => {
     setPin(!pin);
   };
+
   return (
     <div className="plan-card skill-card">
       <div className="plan-card-header">
         <TiPin
-          className={pin ? "pin pinned " : "pin"}
+          className={skill.pinned ? "pin pinned " : "pin"}
           style
           onClick={onPinClick}
         />
-        <h2>Skill Title</h2>
-        <p>Accomplished</p>
+        <h2>{skill.title}</h2>
+        <p>{skill.accomplished ? "Accomplished" : "Not Accomplished"}</p>{" "}
       </div>
       <div className="plan-card-body">
-        <p>This is a sample skill description.</p>
+        <p>{skill.description}</p>
       </div>
       <div className="plan-card-footer skill-card-footer">
         <p>
-          <span>Started at:</span> 2025-4-01
+          <span>Started at:</span> {skill.createdAt.slice(0, 10)}
         </p>
         <button
           className="btn"
           onClick={() => {
-            navigate("/home/my-skills/12");
+            navigate("/home/my-skills/" + skill._id);
           }}
         >
           View Details

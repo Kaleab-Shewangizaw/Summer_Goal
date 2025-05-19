@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import AuthRoute from "./routes/auth.route.js";
 import connectDB from "./utils/connectDB.js";
 import PlanRoute from "./routes/plan.route.js";
+import SkillRoute from "./routes/skill.route.js";
 
 dotenv.config();
 
@@ -16,6 +17,7 @@ app.use(cors({ credentials: true, origin: "http://localhost:5173" }));
 
 app.use("/api/auth", AuthRoute);
 app.use("/api/plan", PlanRoute);
+app.use("/api/skill", SkillRoute);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, connectDB);

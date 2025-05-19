@@ -28,11 +28,6 @@ export const createPlan = async (req, res) => {
   }
 };
 
-try {
-} catch (err) {
-  res.status(500).json(err);
-}
-
 export const getAllPlans = async (req, res) => {
   const userId = req.params.id;
 
@@ -160,7 +155,7 @@ export const deleteComment = async (req, res) => {
   try {
     const updatedPlan = await Plan.findByIdAndUpdate(
       planId,
-      { $pull: { comments: { _id: new mongoose.Types.ObjectId(commentId) } } },
+      { $pull: { comments: { _id: commentId } } },
       { new: true }
     );
     if (!updatedPlan) {

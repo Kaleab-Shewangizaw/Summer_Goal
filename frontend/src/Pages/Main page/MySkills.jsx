@@ -1,10 +1,55 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import SkillCard from "./SkillCard";
 import { IoIosRocket } from "react-icons/io";
+import { UserContext } from "../../utils/AuthContext";
+import { FaClipboardCheck } from "react-icons/fa";
 
 const MySkills = () => {
+  const [skills, setSkills] = useState([]);
+  const { user } = useContext(UserContext);
+  const [loading, setLoading] = useState(false);
+
+  console.log(skills);
+
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = "My Skills";
+    setLoading(true);
+    const getSkills = async () => {
+      const res = await fetch(
+        `http://localhost:5000/api/skill/${user.id}/skills`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
+      const data = await res.json();
+      setSkills(data.skills);
+
+      setLoading(false);
+    };
+    getSkills();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="my-plans">
+        <img
+          src="https://picsum.photos/1200/250"
+          alt="Banner"
+          style={{ width: "100%", height: "100px", objectFit: "cover" }}
+        />
+        <h2>
+          <FaClipboardCheck style={{ color: "#00ff00", fontSize: "2rem" }} />
+        </h2>
+        <div className="my-plans-container">
+          <h2>Loading...</h2>
+        </div>
+      </div>
+    );
+  }
   return (
     <div className="my-plans my-skills">
       <img
@@ -18,14 +63,10 @@ const MySkills = () => {
         />
       </h2>
       <div className="my-plans-container my-skill-container">
-        <SkillCard />
-        <SkillCard />
-        <SkillCard />
-        <SkillCard />
-        <SkillCard />
-        <SkillCard />
-        <SkillCard />
-        <SkillCard />
+        {skills &&
+          skills.map((skill) => {
+            return <SkillCard key={skill._id} skill={skill} />;
+          })}
 
         <div
           onClick={() => {

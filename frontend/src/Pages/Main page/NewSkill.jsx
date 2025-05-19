@@ -1,11 +1,43 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { TiPin } from "react-icons/ti";
+import { UserContext } from "../../utils/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const NewSkill = () => {
   const [pin, setIsPinned] = React.useState(false);
+  const { user } = useContext(UserContext);
+  const [title, setTitle] = useState("");
+  const [desc, setDesc] = useState("");
+  const navigate = useNavigate();
 
   const onPinClick = () => {
     setIsPinned(!pin);
+  };
+
+  const createSkill = async (e) => {
+    e.preventDefault();
+    const res = await fetch(
+      `http://localhost:5000/api/skill/create/${user.id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          title,
+          description: desc,
+          pinned: pin,
+        }),
+      }
+    );
+    const data = await res.json();
+    if (!data.success) {
+      alert(data.message || "something went wrong, try again!");
+      return;
+    }
+    alert("Skill created successfully!");
+    navigate("/home/my-skills");
   };
 
   return (
@@ -22,7 +54,7 @@ const NewSkill = () => {
           onClick={onPinClick}
         />
         <h2>New Skill</h2>
-        <form action="">
+        <form action="" onSubmit={createSkill}>
           <p>
             <span>Name</span>
           </p>
@@ -33,6 +65,10 @@ const NewSkill = () => {
             placeholder="Enter your skill here..."
             // limit to 15 character
             maxLength={30}
+            value={title}
+            onChange={(e) => {
+              setTitle(e.target.value);
+            }}
           />
           <p>
             <span>Description</span>
@@ -41,6 +77,10 @@ const NewSkill = () => {
             name=""
             id="plan-desc"
             placeholder="Describe your skill here..."
+            value={desc}
+            onChange={(e) => {
+              setDesc(e.target.value);
+            }}
           ></textarea>
 
           <button type="submit" className="mark-done-btn">

@@ -18,8 +18,6 @@ const PlanPage = () => {
 
   const id = window.location.href.split("/").pop();
 
-  console.log(comments);
-
   useEffect(() => {
     const getPlan = async () => {
       setLoading(true);
@@ -156,16 +154,17 @@ const PlanPage = () => {
       );
       const data = await res.json();
       if (!data.success) {
-        alert("Something went wrong, try again!");
+        alert("Something went wrong, refresh and try again!");
         return;
       }
       setComments((prevComments) => [
         ...prevComments,
         { text: commentText, createdAt: new Date().toISOString() },
       ]);
+      navigate(`/home/my-plans/${id}`);
       setCommentText("");
     } catch (error) {
-      alert("Something went wrong, try again!");
+      alert("Something went wrong, refresh and try again!");
       console.error(error);
     }
   };
@@ -183,7 +182,7 @@ const PlanPage = () => {
       );
       const data = await res.json();
       if (!data.success) {
-        alert("Something went wrong, try again!");
+        alert("Something went wrong, refresh and try again!");
         return;
       }
       setComments((prevComments) =>
