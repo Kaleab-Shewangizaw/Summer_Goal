@@ -7,8 +7,11 @@ import { useNavigate } from "react-router-dom";
 
 const SkillPage = () => {
   const id = window.location.pathname.split("/").pop();
-  const [isDone, setIsDone] = useState(false);
+  const [commentText, setCommentText] = useState("");
+
   const [skill, setSkill] = useState({});
+  const [popup, setPopup] = useState(false);
+
   const navigate = useNavigate();
   useEffect(() => {
     const fetchSkillData = async () => {
@@ -26,7 +29,115 @@ const SkillPage = () => {
       setSkill(data.skill);
     };
     fetchSkillData();
-  }, []);
+  }, [id]);
+
+  const handleMarkDone = async () => {
+    const res = await fetch(
+      "http://localhost:5000/api/skill/" + id + "/updateSkill",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          isAccomplished: !skill.isAccomplished,
+          dateOfAccomplishement: new Date().toISOString(),
+        }),
+      }
+    );
+    const data = await res.json();
+    if (data.success) {
+      setSkill((prevSkill) => ({
+        ...prevSkill,
+        isAccomplished: !prevSkill.isAccomplished,
+      }));
+
+      alert("updated successfully", skill.isAccomplished);
+    } else {
+      alert(data.message || "Failed to update skill status.");
+    }
+  };
+
+  const addComment = async () => {
+    if (!commentText) {
+      alert("Please add a comment");
+      return;
+    }
+    const res = await fetch(
+      "http://localhost:5000/api/skill/" + id + "/addComment",
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify({
+          text: commentText,
+        }),
+      }
+    );
+    const data = await res.json();
+    if (data.success) {
+      const newComment = {
+        text: commentText,
+        Date: new Date().toISOString().slice(0, 10),
+      };
+      setSkill((prevSkill) => ({
+        ...prevSkill,
+        comment: [...prevSkill.comment, newComment],
+      }));
+
+      setCommentText("");
+    } else {
+      alert(data.message || "Failed to add comment.");
+    }
+  };
+
+  const deleteComment = async (commentId) => {
+    const res = await fetch(
+      `http://localhost:5000/api/skill/${id}/${commentId}/deleteComment/`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      }
+    );
+    const data = await res.json();
+    if (data.success) {
+      setSkill((prevSkill) => ({
+        ...prevSkill,
+        comment: prevSkill.comment.filter(
+          (comment) => comment._id !== commentId
+        ),
+      }));
+    } else {
+      alert(data.message || "Failed to delete comment.");
+    }
+  };
+
+  const deleteSkill = async () => {
+    const res = await fetch(
+      `http://localhost:5000/api/skill/${id}/deleteSkill`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+      }
+    );
+    const data = await res.json();
+    if (data.success) {
+      alert("Skill deleted successfully");
+      navigate("/home/my-skills");
+    } else {
+      alert(data.message || "Failed to delete skill.");
+    }
+  };
+
   return (
     <div className="skill-page plan-page">
       <img
@@ -38,14 +149,85 @@ const SkillPage = () => {
         <div className="deleteEdit-btn">
           <FaEdit
             onClick={() => {
-              navigate("/home/my-skills/12/edit-skill");
+              navigate("/home/my-skills/" + id + "/edit-skill");
             }}
             className="edit"
           />
           <FaShare className="share" />
-          <FaTrash className="trash" />
+          <FaTrash className="trash" onClick={() => setPopup(true)} />
         </div>
         <h2>{skill.title}</h2>
+        <div
+          className="delete-popup"
+          style={{
+            display: popup ? "block" : "none",
+            position: "absolute",
+            top: "20%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            backgroundColor: "white",
+            padding: "20px",
+            borderRadius: "10px",
+            width: "600px",
+            background: "rgb(39, 39, 39)",
+            zIndex: 1000,
+            color: "red",
+            fontSize: "18px",
+          }}
+        >
+          <h3
+            style={{
+              color: "rgb(255, 35, 35)",
+              textAlign: "center",
+              fontSize: "20px",
+            }}
+          >
+            Are you sure you want to delete this skill?
+          </h3>
+          <p style={{ textAlign: "center", fontSize: "16px" }}>
+            This action cannot be undone. All your progress and notes will be
+            lost.
+          </p>
+
+          <button
+            onClick={deleteSkill}
+            style={{
+              padding: "8px",
+              margin: "10px",
+              cursor: "pointer",
+              backgroundColor: "rgb(255, 35, 35)",
+              color: "white",
+              fontSize: "14px",
+              fontWeight: "bold",
+              border: "none",
+              borderRadius: "5px",
+            }}
+          >
+            <FaTrash
+              style={{
+                marginRight: "5px",
+              }}
+            />
+            Delete Skill
+          </button>
+          <button
+            onClick={() => setPopup(false)}
+            style={{
+              padding: "8px",
+              margin: "10px",
+              cursor: "pointer",
+              backgroundColor: "rgb(168, 168, 168)3)",
+              color: "black",
+              fontSize: "14px",
+              width: "100px",
+              fontWeight: "bold",
+              border: "none",
+              borderRadius: "5px",
+            }}
+          >
+            No
+          </button>
+        </div>
         <h3>
           Progress:{" "}
           <span className={skill.isAccomplished ? "done pro" : "pro"}>
@@ -56,6 +238,14 @@ const SkillPage = () => {
           <span>Description</span>
           {skill.description}
         </p>
+        {skill.isAccomplished && (
+          <p>
+            <span>Accomplished at:</span>
+            {skill.isAccomplished
+              ? skill.dateOfAccomplishement.slice(0, 10)
+              : " Not Accomplished"}
+          </p>
+        )}
 
         <div className="plan-comments">
           {skill.comment && skill.comment.length > 0 ? (
@@ -63,8 +253,11 @@ const SkillPage = () => {
               <div className="comment" key={index}>
                 <p className="comment-content">{comment.text}</p>
                 <div>
-                  <p className="comment-date">{comment.Date}</p>
-                  <FaTrash className="trash" />
+                  <p className="comment-date">{comment.Date.slice(0, 10)}</p>
+                  <FaTrash
+                    className="trash"
+                    onClick={() => deleteComment(comment._id)}
+                  />
                 </div>
               </div>
             ))
@@ -78,19 +271,18 @@ const SkillPage = () => {
             name="comment"
             id="comment"
             placeholder="add your reflection here"
+            value={commentText}
+            onChange={(e) => setCommentText(e.target.value)}
           ></textarea>
-          <button>
+          <button onClick={addComment}>
             <BsArrowUp />
           </button>
         </div>
 
-        <button
-          onClick={() => {
-            setIsDone(!isDone);
-          }}
-          className="mark-done-btn"
-        >
-          Mark Done
+        <button onClick={handleMarkDone} className="mark-done-btn">
+          {skill.isAccomplished
+            ? "Mark as Not Accomplished"
+            : "Mark as Accomplished"}
         </button>
       </div>
     </div>

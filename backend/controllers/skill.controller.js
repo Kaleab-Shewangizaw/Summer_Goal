@@ -91,3 +91,59 @@ export const updateSkill = async (req, res) => {
       .json({ success: false, message: "failed to update skill" });
   }
 };
+
+export const addComment = async (req, res) => {
+  const { id } = req.params;
+  const { text } = req.body;
+  try {
+    const skill = await Skill.findByIdAndUpdate(
+      id,
+      {
+        $push: { comment: { text } },
+      },
+      { new: true }
+    );
+    return res.status(200).json({ success: true, skill });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ success: false, message: "failed to add comment" });
+  }
+};
+
+export const deleteComment = async (req, res) => {
+  const { id, commentId } = req.params;
+  try {
+    const skill = await Skill.findByIdAndUpdate(
+      id,
+      {
+        $pull: { comment: { _id: commentId } },
+      },
+      { new: true }
+    );
+    return res.status(200).json({ success: true, skill });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ success: false, message: "failed to delete comment" });
+  }
+};
+
+export const deleteSkill = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const deletedSkill = await Skill.findByIdAndDelete(id);
+    if (!deletedSkill) {
+      return res
+        .status(404)
+        .json({ success: false, message: "skill not found" });
+    }
+    return res
+      .status(200)
+      .json({ success: true, message: "skill deleted successfully" });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ success: false, message: "failed to delete skill" });
+  }
+};

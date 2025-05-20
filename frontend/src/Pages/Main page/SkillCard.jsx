@@ -54,7 +54,7 @@ const SkillCard = (props) => {
           onClick={onPinClick}
         />
         <h2>{skill.title}</h2>
-        <p>{skill.accomplished ? "Accomplished" : "Not Accomplished"}</p>{" "}
+        <p>{skill.isAccomplished ? "Accomplished" : "Not Accomplished"}</p>{" "}
       </div>
       <div className="plan-card-body">
         <p>{skill.description}</p>
