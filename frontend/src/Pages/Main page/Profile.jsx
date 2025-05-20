@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./ProfileStyle.css";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../utils/AuthContext";
 const Profile = () => {
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
   return (
     <div className="plan-page new-plan profile">
       <img
@@ -23,20 +25,16 @@ const Profile = () => {
         <div className="profile-content">
           <p>
             <span>Name:</span>
-            some name
+            {user.username}
           </p>
           <p>
-            <span>Bio:</span> Lorem ipsum dolor sit amet consectetur adipisicing
-            elit. Quisquam, voluptatibus.
+            <span>Bio:</span>
+            {user.bio}
           </p>
           <p>
             <span>Email:</span>
             <a href="mailto:" />
-            user@gmail.com
-          </p>
-          <p>
-            <span>Progress:</span>
-            50% [5/10 skills] [5/10 plans]
+            {user.email}
           </p>
           <p>
             <span>Achievements:</span>

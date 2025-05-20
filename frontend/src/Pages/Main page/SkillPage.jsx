@@ -8,12 +8,13 @@ import { useNavigate } from "react-router-dom";
 const SkillPage = () => {
   const id = window.location.pathname.split("/").pop();
   const [commentText, setCommentText] = useState("");
-
+  const [loading, setLoading] = useState(false);
   const [skill, setSkill] = useState({});
   const [popup, setPopup] = useState(false);
 
   const navigate = useNavigate();
   useEffect(() => {
+    setLoading(true);
     const fetchSkillData = async () => {
       const res = await fetch("http://localhost:5000/api/skill/" + id, {
         method: "GET",
@@ -22,6 +23,7 @@ const SkillPage = () => {
         },
       });
       const data = await res.json();
+      setLoading(false);
       if (!data.success) {
         alert(data.message || "Something went wrong, try again!");
         return;
@@ -138,6 +140,19 @@ const SkillPage = () => {
     }
   };
 
+  if (loading) {
+    return (
+      <div className="skill-page plan-page">
+        <img
+          src="https://picsum.photos/1200/250"
+          alt="Banner"
+          style={{ width: "100%", height: "100px", objectFit: "cover" }}
+        />
+        <div className="plan-page-content">Loading ...</div>
+      </div>
+    );
+  }
+
   return (
     <div className="skill-page plan-page">
       <img
@@ -242,7 +257,7 @@ const SkillPage = () => {
           <p>
             <span>Accomplished at:</span>
             {skill.isAccomplished
-              ? skill.dateOfAccomplishement.slice(0, 10)
+              ? skill.dateOfAccomplishement?.slice(0, 10)
               : " Not Accomplished"}
           </p>
         )}

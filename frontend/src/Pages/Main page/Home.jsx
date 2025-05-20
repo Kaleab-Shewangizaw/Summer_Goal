@@ -6,9 +6,10 @@ import {
   FaClipboardCheck,
   FaMedal,
   FaCheckCircle,
+  FaTrophy,
 } from "react-icons/fa";
 import { IoIosRocket, IoMdCloudDone } from "react-icons/io";
-import { BsGraphUp } from "react-icons/bs";
+import { BsGraphUp, BsTrophy } from "react-icons/bs";
 import PlanCard from "./PlanCard";
 import { CiNoWaitingSign } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +20,10 @@ const Home = () => {
   const navigate = useNavigate();
   const { user, userInfo, setUserInfo } = useContext(UserContext);
   const { id } = user;
+  const [plans, setPlans] = useState([]);
+  const [skills, setSkills] = useState([]);
   useEffect(() => {
+    document.title = "Home";
     const fetchUserData = async () => {
       try {
         const res = await fetch(`http://localhost:5000/api/auth/profile/${id}`);
@@ -30,11 +34,40 @@ const Home = () => {
         console.log(err);
       }
     };
+    const getPlans = async () => {
+      const res = await fetch(
+        `http://localhost:5000/api/plan/${user.id}/get-plans`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
+      const data = await res.json();
+      if (!data.success) {
+        alert(data.message || "Something went wrong, try again!");
+        return;
+      }
+
+      setPlans(data.plans);
+    };
+    getPlans();
+    const fetchSkills = async () => {
+      const res = await fetch(`http://localhost:5000/api/skill/${id}/skills`, {
+        method: "GET",
+        credentials: "include",
+      });
+      const data = await res.json();
+      if (!data.success) {
+        alert(data.message || "Something went wrong, try again!");
+        return;
+      }
+      setSkills(data.skills);
+    };
+
+    fetchSkills();
 
     if (id) fetchUserData();
   }, [id]);
-
-  // 🚨 This prevents rendering anything until userInfo is ready
 
   function getDaysLeft() {
     const today = new Date();
@@ -43,7 +76,7 @@ const Home = () => {
         ? today.getFullYear() + 1
         : today.getFullYear();
 
-    const newYearDate = new Date(year, 8, 11); // September 11
+    const newYearDate = new Date(year, 8, 11);
     const diff = newYearDate - today;
     return Math.ceil(diff / (1000 * 60 * 60 * 24));
   }
@@ -55,6 +88,25 @@ const Home = () => {
     return () => clearInterval(interval);
   }, []);
   if (!userInfo) return null;
+
+  const numberOfPlans = plans.length;
+  const completedPlans = plans.filter(
+    (plan) => Number(plan.progress) >= Number(plan.target)
+  ).length;
+  const pinnedPlans = plans.filter((plan) => plan.pinned === true);
+  const inProgressPlans = plans.filter(
+    (plan) => Number(plan.progress) < Number(plan.target) && plan.progress > 0
+  ).length;
+  const notStartedPlans = plans.filter((plan) => plan.progress === 0).length;
+
+  const completeSkills = skills.filter(
+    (skill) => skill.isAccomplished === true
+  );
+  const pinnedSkills = skills.filter((skill) => skill.pinned === true);
+  const completedSkills =
+    completeSkills.length > 5 ? completeSkills.slice(0, 5) : completeSkills;
+
+  const overallProgress = Math.round((completedPlans / numberOfPlans) * 100);
   return (
     <div className="home">
       <div className="home-banner">
@@ -105,28 +157,40 @@ const Home = () => {
 
           <p>
             <span>
-              {" "}
               <FaCheckCircle /> Completed
             </span>
-            3/5 <span className="percent">60%</span>
+            {completedPlans}/{numberOfPlans}
+            <span className="percent">
+              {numberOfPlans > 0
+                ? Math.round((completedPlans / numberOfPlans) * 100)
+                : 0}
+              %
+            </span>
           </p>
+
           <p>
             <span>
               <BsGraphUp /> In Progress
             </span>
-            2/5 <span className="percent">40%</span>
+            {inProgressPlans}/{numberOfPlans}{" "}
+            <span className="percent">
+              {Math.round((inProgressPlans / numberOfPlans) * 100)}%
+            </span>
           </p>
           <p>
             <span>
               <CiNoWaitingSign /> Not Started
             </span>
-            0/5 <span className="percent">0%</span>
+            {notStartedPlans}/{numberOfPlans}{" "}
+            <span className="percent">
+              {Math.round((notStartedPlans / numberOfPlans) * 100)}%
+            </span>
           </p>
           <p>
             <span>
               <IoMdCloudDone /> over all
             </span>
-            0/5 <span className="percent">0%</span>
+            -<span className="percent">{overallProgress}%</span>
           </p>
         </div>
         <div className="tracker-c">
@@ -137,7 +201,31 @@ const Home = () => {
             Skills
           </h2>
           <p>
-            <span> React, JavaScript, CSS</span>
+            {completedSkills.length > 0 && completedSkills.length > 0 ? (
+              completedSkills.map((skill) => {
+                return (
+                  <span
+                    key={skill._id}
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    <FaTrophy
+                      style={{
+                        color: "hsl(69, 100.00%, 50.00%)",
+                        fontSize: "1.5rem",
+                      }}
+                    />
+                    {"     "}
+                    {skill.title}
+                  </span>
+                );
+              })
+            ) : (
+              <span>No skills yet</span>
+            )}
           </p>
         </div>
         <div className="tracker-c">
@@ -156,14 +244,11 @@ const Home = () => {
       <div className="section2">
         <h2>Next Plan</h2>
         <div className="planView">
-          {(() => {
-            const pinnedPlans = userInfo?.plans?.filter(
-              (plan) => plan.isPinned
-            );
-            return pinnedPlans.map((plan) => (
-              <PlanCard key={plan.id} plan={plan} />
-            ));
-          })()}
+          {pinnedPlans.length > 0 ? (
+            pinnedPlans.map((plan) => <PlanCard key={plan._id} plan={plan} />)
+          ) : (
+            <span>No plans pinned yet</span>
+          )}
           <button
             onClick={() => {
               navigate("/home/my-plans");
@@ -179,14 +264,13 @@ const Home = () => {
       <div className="section2">
         <h2>Next Skill</h2>
         <div className="planView">
-          {(() => {
-            const pinnedSkills = userInfo?.skills?.filter(
-              (skill) => skill.isPinned
-            );
-            return pinnedSkills.map((skill) => (
-              <SkillCard key={skill.id} plan={skill} />
-            ));
-          })()}
+          {pinnedSkills.length > 0 ? (
+            pinnedSkills.map((skill) => (
+              <SkillCard key={skill._id} skill={skill} />
+            ))
+          ) : (
+            <span>No skills pinned yet</span>
+          )}
           <button
             onClick={() => {
               navigate("/home/my-skills");
