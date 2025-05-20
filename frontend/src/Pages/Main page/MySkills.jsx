@@ -10,8 +10,6 @@ const MySkills = () => {
   const { user } = useContext(UserContext);
   const [loading, setLoading] = useState(false);
 
-  console.log(skills);
-
   const navigate = useNavigate();
 
   useEffect(() => {
