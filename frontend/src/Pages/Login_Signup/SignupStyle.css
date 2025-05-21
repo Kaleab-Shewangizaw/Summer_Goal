@@ -167,13 +167,91 @@
   border-radius: 8px;
 }
 
-.show-password span {
+span {
   font-family: "DM Sans", sans-serif;
+  display: block;
   font-weight: 400;
-  font-size: 0.8rem;
+  font-size: 1rem;
   cursor: pointer;
   margin-left: 5px;
-  border: 1px solid #8c8b8b;
-  padding: 0.5rem;
+  margin-block: 0;
+
   border-radius: 8px;
+  width: 30%;
+}
+
+@media (max-width: 900px) {
+  .signup {
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+    gap: 20px;
+  }
+
+  .right-c {
+    display: none;
+  }
+
+  .left-c {
+    width: 100%;
+    padding: 2rem 1rem;
+    height: auto;
+  }
+
+  .left-c .signup-form {
+    width: 100%;
+    height: auto;
+    margin-top: 0;
+    align-items: center;
+  }
+
+  .left-c .signup-form h2 {
+    font-size: 1.8rem;
+    text-align: center;
+  }
+
+  .left-c .signup-form p {
+    font-size: 1rem;
+    text-align: center;
+    width: 90%;
+    margin-bottom: 2rem;
+  }
+
+  .left-c .signup-form form {
+    width: 100%;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .left-c .signup-form form input {
+    width: 90% !important;
+    max-width: 400px;
+    font-size: 1rem;
+  }
+
+  .left-c .signup-form form button {
+    width: 200px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .left-c .social-login {
+    justify-content: center;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .left-c .signup-form p:last-child {
+    text-align: center;
+  }
+
+  .signup-footer {
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 0;
+  }
+
+  .signup-footer p {
+    text-align: center;
+  }
 }

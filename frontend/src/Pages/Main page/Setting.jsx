@@ -8,7 +8,7 @@ import {
   FaTelegram,
   FaTrash,
 } from "react-icons/fa";
-import { FaX } from "react-icons/fa6";
+import { FaX, FaXTwitter } from "react-icons/fa6";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../utils/AuthContext";
 
@@ -102,7 +102,7 @@ const Setting = () => {
             backgroundColor: "white",
             padding: "20px",
             borderRadius: "10px",
-            width: "600px",
+            width: "100%",
             background: "rgb(39, 39, 39)",
             zIndex: 1000,
             color: "red",
@@ -170,7 +170,7 @@ const Setting = () => {
             backgroundColor: "white",
             padding: "20px",
             borderRadius: "10px",
-            width: "600px",
+            width: "100%",
             background: "rgb(39, 39, 39)",
             zIndex: 1000,
             color: "red",
@@ -268,19 +268,39 @@ const Setting = () => {
           <p>
             <span>Contact</span>
           </p>
-          <button>
+          <button
+            onClick={() => {
+              window.open("https://t.me/kal_ab_s", "_blank");
+            }}
+          >
             <FaTelegram />
           </button>
-          <button>
-            <FaX />
+          <button
+            onClick={() => {
+              window.open("https://x.com/KaleabShew27310", "_blank");
+            }}
+          >
+            <FaXTwitter />
           </button>
-          <button>
+          <button
+            onClick={() => {
+              window.open("https://github.com/Kaleab-Shewangizaw", "_blank");
+            }}
+          >
             <FaGithub />
           </button>
-          <button>
+          <button
+            onClick={() => {
+              window.open("https://www.linkedin.com/in/kal-x/", "_blank");
+            }}
+          >
             <FaLinkedin />
           </button>
-          <button>
+          <button
+            onClick={() => {
+              window.open("https://www.instagram.com/kal_ab.s/", "_blank");
+            }}
+          >
             <FaInstagram />
           </button>
           <p>
@@ -346,7 +366,12 @@ const Setting = () => {
             to help you track your progress and achieve your goals during the
             rainy season. If you have any questions or suggestions, feel free to
             reach out! [ Liked it? please give it a STAR on github 😉 ]
-            <a href="https://github.com">Link</a>
+            <a
+              href="https://github.com/Kaleab-Shewangizaw/Summer_Goal"
+              target="_blank"
+            >
+              Link
+            </a>
           </p>
         </div>
       </div>

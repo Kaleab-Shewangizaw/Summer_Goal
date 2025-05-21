@@ -173,7 +173,7 @@ const Home = () => {
             </span>
             {inProgressPlans}/{numberOfPlans}{" "}
             <span className="percent">
-              {Math.round((inProgressPlans / numberOfPlans) * 100)}%
+              {Math.round((inProgressPlans / numberOfPlans) * 100) || 0}%
             </span>
           </p>
           <p>
@@ -182,7 +182,7 @@ const Home = () => {
             </span>
             {notStartedPlans}/{numberOfPlans}{" "}
             <span className="percent">
-              {Math.round((notStartedPlans / numberOfPlans) * 100)}%
+              {Math.round((notStartedPlans / numberOfPlans) * 100) || 0}%
             </span>
           </p>
         </div>

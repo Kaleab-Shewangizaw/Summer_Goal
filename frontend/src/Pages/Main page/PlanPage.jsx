@@ -229,7 +229,7 @@ const PlanPage = () => {
             backgroundColor: "white",
             padding: "20px",
             borderRadius: "10px",
-            width: "600px",
+            width: "100%",
             background: "rgb(39, 39, 39)",
             zIndex: 1000,
             color: "red",

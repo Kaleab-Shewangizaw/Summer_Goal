@@ -48,11 +48,19 @@
   color: hsl(0, 0%, 67%);
   margin-block: 0;
   text-align: right;
+  display: flex;
+  justify-content: right;
+  align-items: center;
+  gap: 0;
 }
 
 .plan-page-content h3 span {
   font-weight: 700;
-  color: hsl(50, 98%, 48%);
+
+  margin-left: 0;
+
+  width: fit-content;
+  padding: 0 5px;
 }
 
 .plan-page-content p span {
@@ -221,4 +229,104 @@
   cursor: pointer;
   background-color: #032d7b7a;
   transition: background-color 0.3s ease;
+}
+
+@media (max-width: 900px) {
+  .plan-page-content {
+    width: 80%;
+    min-width: unset;
+    padding: 1.5rem;
+  }
+
+  .plan-page-content .deleteEdit-btn {
+    top: 1%;
+    right: 3%;
+    gap: 20px;
+    font-size: 1.2rem;
+  }
+
+  .plan-page-content h2 {
+    font-size: 1.3rem;
+  }
+
+  .plan-page-content p {
+    font-size: 1rem;
+  }
+
+  .plan-page-content h3 {
+    font-size: 0.9rem;
+  }
+
+  .comment .comment-content {
+    font-size: 1.05rem;
+  }
+
+  .comment-date {
+    font-size: 0.9rem;
+  }
+
+  .add-comment button {
+    font-size: 1.5rem;
+    width: 35px;
+    height: 35px;
+  }
+
+  .mark-done-btn {
+    font-size: 1.2rem;
+    width: 70%;
+  }
+}
+
+@media (max-width: 600px) {
+  .plan-page-content {
+    width: 95%;
+    padding: 1rem;
+  }
+
+  .plan-page-content .deleteEdit-btn {
+    top: 2%;
+    right: 2%;
+    gap: 15px;
+    font-size: 1rem;
+  }
+
+  .plan-page-content h2 {
+    font-size: 1.1rem;
+  }
+
+  .plan-page-content p {
+    font-size: 0.95rem;
+  }
+
+  .plan-page-content h3 {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+
+  .plan-comments {
+    width: 95%;
+    height: 300px;
+  }
+
+  .add-comment {
+    width: 95%;
+    flex-direction: row;
+    padding: 0.5rem;
+  }
+
+  .add-comment button {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+  }
+
+  .plan-page-content textarea {
+    font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  .mark-done-btn {
+    width: 90%;
+    font-size: 1rem;
+  }
 }

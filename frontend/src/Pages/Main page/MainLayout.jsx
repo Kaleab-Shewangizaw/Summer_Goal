@@ -1,23 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { Outlet } from "react-router-dom";
 import MainSidePanel from "./MainSidePanel";
 import "./mainStyle.css";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { FaX } from "react-icons/fa6";
 
 const MainLayout = () => {
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
+
+  const handleToggleSidePanel = () => {
+    const sidePanel = document.querySelector(".side-panel");
+    if (!sidePanel) return;
+
+    sidePanel.classList.toggle("show");
+    setIsSidebarVisible((prev) => !prev);
+  };
+
   return (
-    <div
-      style={{
-        display: "flex",
-        width: "98%",
-        marginInline: "auto",
-        marginTop: "20px",
-        height: "95vh",
-        borderRadius: "8px",
-        overflow: "hidden",
-      }}
-    >
-      <MainSidePanel />
-      <main style={{ flex: 1, paddingLeft: "20px", overflowY: "auto" }}>
+    <div className="main-layout-container">
+      {isSidebarVisible ? (
+        <FaX className="menu-btn" onClick={handleToggleSidePanel} />
+      ) : (
+        <GiHamburgerMenu className="menu-btn" onClick={handleToggleSidePanel} />
+      )}
+
+      <MainSidePanel className="side-panel" />
+      <main className="main-content">
         <Outlet />
       </main>
     </div>

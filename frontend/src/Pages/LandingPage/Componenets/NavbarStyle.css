@@ -96,3 +96,13 @@
 .cta_btn:active {
   transform: scale(0.95);
 }
+
+@media (max-width: 768px) {
+  .nav_links {
+    display: none;
+  }
+
+  .cta_btn {
+    font-size: 0.9rem;
+  }
+}

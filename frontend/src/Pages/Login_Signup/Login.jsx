@@ -72,18 +72,19 @@ const Login = () => {
                 setEmail(e.target.value);
               }}
             />
-            <div className="show-password">
-              <input
-                type={isShowen ? "text" : "password"}
-                placeholder="Password"
-                required
-                value={password}
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-              />
-              <span onClick={showPassword}>{isShowen ? "Hide" : "Show"}</span>
-            </div>
+
+            <input
+              type={isShowen ? "text" : "password"}
+              placeholder="Password"
+              required
+              value={password}
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+
+            <span onClick={showPassword}>{isShowen ? "Hide" : "Show"}</span>
+
             {error && <p style={{ color: "red", fontSize: "12px" }}>{error}</p>}
             <button onClick={handleLogin}>Log in</button>
           </form>

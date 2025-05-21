@@ -6,6 +6,7 @@ import HowItWorks from "./Componenets/HowItWorks";
 import About from "./Componenets/About";
 import Footer from "./Componenets/Footer";
 import { useNavigate } from "react-router-dom";
+import MobileView from "./Componenets/MobileView";
 
 const LandingPage = () => {
   document.title = "Skill Planner";
@@ -15,7 +16,7 @@ const LandingPage = () => {
     navigate("/Signup");
   };
   const handleResize = () => {
-    if (window.innerWidth <= 800) {
+    if (window.innerWidth <= 1200) {
       setIsMobile(true);
     } else {
       setIsMobile(false);
@@ -30,7 +31,7 @@ const LandingPage = () => {
   }, []);
 
   if (isMobile) {
-    return <>Mobile and tablet view coming soon!</>;
+    return <MobileView />;
   }
   return (
     <>

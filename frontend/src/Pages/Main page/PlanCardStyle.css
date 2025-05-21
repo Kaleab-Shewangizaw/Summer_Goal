@@ -88,10 +88,13 @@
   font-size: 1rem;
   color: #aaa;
   margin: 0;
+  display: flex;
+  gap: 5px;
 }
 
 .plan-card .plan-card-footer p span {
   color: #cdf0f9;
+  width: fit-content;
 }
 
 .my-plans h2,
@@ -154,4 +157,42 @@
 .my-skills .my-skill-container .add-plan:hover {
   color: #50aef6ac;
   border: 3px dashed #50aef6ac;
+}
+
+@media (max-width: 900px) {
+  .plan-card,
+  .add-plan {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .my-plans-container,
+  .section2 .planView {
+    flex-direction: column;
+    gap: 15px;
+    padding: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  .plan-card,
+  .add-plan {
+    padding: 20px;
+    height: auto;
+  }
+
+  .plan-card .plan-card-header h2,
+  .plan-card .plan-card-header p,
+  .plan-card .plan-card-body p,
+  .plan-card .plan-card-footer p,
+  .plan-card .plan-card-footer button,
+  .add-plan h2,
+  .add-plan p,
+  .add-plan h6 {
+    font-size: 0.9rem;
+  }
+
+  .plan-card .plan-card-footer button {
+    padding: 8px 16px;
+  }
 }

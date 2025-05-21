@@ -40,6 +40,7 @@
 .date-view p {
   background-color: black;
   width: fit-content;
+  display: flex;
   padding: 0.4rem 0.8rem;
   color: white;
   border-radius: 0 0.5rem 0.5rem 0;
@@ -54,6 +55,7 @@
 }
 
 .date-view p span {
+  width: fit-content;
   font-weight: 700;
   color: hsl(0, 0%, 98%);
 }
@@ -175,4 +177,80 @@
 
 .skill-card:hover .skill-card-footer .btn {
   background-color: #059af17a;
+}
+
+@media (max-width: 900px) {
+  .home-banner .home-banner-text h1 {
+    font-size: 1.4rem;
+  }
+
+  .home-banner .home-banner-text p {
+    font-size: 1rem;
+  }
+
+  .date-view,
+  .date-view div {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tracker {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tracker .tracker-c {
+    width: 90%;
+    min-width: unset;
+    margin-left: 0;
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .home-banner .home-banner-text h1 {
+    font-size: 1.2rem;
+  }
+
+  .home-banner .home-banner-text p {
+    font-size: 0.95rem;
+  }
+
+  .date-view h2 {
+    font-size: 1.2rem;
+  }
+
+  .date-view p {
+    font-size: 0.9rem;
+    padding: 0.3rem 0.6rem;
+  }
+
+  .tracker .tracker-c h2 {
+    font-size: 1.1rem;
+  }
+
+  .tracker .tracker-c p {
+    font-size: 0.9rem;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .tracker .tracker-c p span.percent {
+    margin-left: 0;
+  }
+
+  .see-all-btn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+
+  .pin {
+    font-size: 1.2rem;
+    top: 10px;
+    right: 10px;
+  }
+
+  .pinned {
+    font-size: 1.6rem;
+  }
 }
