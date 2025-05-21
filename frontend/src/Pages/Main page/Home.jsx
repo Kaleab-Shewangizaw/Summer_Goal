@@ -106,7 +106,6 @@ const Home = () => {
   const completedSkills =
     completeSkills.length > 5 ? completeSkills.slice(0, 5) : completeSkills;
 
-  const overallProgress = Math.round((completedPlans / numberOfPlans) * 100);
   return (
     <div className="home">
       <div className="home-banner">
@@ -185,12 +184,6 @@ const Home = () => {
             <span className="percent">
               {Math.round((notStartedPlans / numberOfPlans) * 100)}%
             </span>
-          </p>
-          <p>
-            <span>
-              <IoMdCloudDone /> over all
-            </span>
-            -<span className="percent">{overallProgress}%</span>
           </p>
         </div>
         <div className="tracker-c">

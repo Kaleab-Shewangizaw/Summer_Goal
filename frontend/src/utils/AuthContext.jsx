@@ -14,6 +14,7 @@ export const UserContextProvider = ({ children }) => {
       .then((data) => {
         if (data.userData) {
           setUser(data.userData);
+          console.log(data.userData);
         } else {
           setUser(null);
         }
@@ -22,8 +23,9 @@ export const UserContextProvider = ({ children }) => {
         console.error("Error fetching profile:", err);
       });
   }, []);
+  const id = user ? user._id : null;
   return (
-    <UserContext.Provider value={{ user, setUser, userInfo, setUserInfo }}>
+    <UserContext.Provider value={{ user, setUser, userInfo, setUserInfo, id }}>
       {children}
     </UserContext.Provider>
   );

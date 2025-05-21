@@ -1,11 +1,45 @@
 import React from "react";
 import "./EditProfile.css";
+import { UserContext } from "../../utils/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const EditProfile = () => {
-  const [showPassword, setShowPassword] = React.useState(false);
-  const handleShowPassword = () => {
-    setShowPassword(!showPassword);
+  const { userInfo, setUserInfo } = React.useContext(UserContext);
+
+  const [name, setName] = React.useState(userInfo.username);
+  const [bio, setBio] = React.useState(userInfo.bio);
+  const [email, setEmail] = React.useState(userInfo.email);
+  const navigate = useNavigate();
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    const updateUser = async () => {
+      const res = await fetch(
+        "http://localhost:5000/api/auth/edit/" + userInfo._id,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: name,
+            bio,
+            email,
+          }),
+        }
+      );
+      if (res.ok) {
+        const updatedUser = await res.json();
+        setUserInfo(updatedUser);
+        alert("User updated successfully");
+        navigate("/home/profile");
+      } else {
+        console.error("Failed to update user");
+      }
+    };
+    updateUser();
   };
+
   return (
     <div className="plan-page new-plan setting">
       <img
@@ -17,34 +51,39 @@ const EditProfile = () => {
         <h2>Edit Profile</h2>
 
         <div>
-          <p>
-            <span>Name</span>
-          </p>
-          <input type="text" />
-          <p>
-            <span>Bio</span>
-          </p>
-          <textarea
-            name=""
-            id=""
-            cols="30"
-            rows="10"
-            placeholder="Describe yourself here..."
-            maxLength={200}
-          ></textarea>
-          <p>
-            <span>Email</span>
-          </p>
-          <input type="email" />
-          <p>
-            <span>Password</span>
-          </p>
-          <input type={showPassword ? "text" : "password"} />
-          <button onClick={handleShowPassword}>
-            {showPassword ? "Hide" : "Show"}
-          </button>
+          <form action="" style={{ width: "100%" }} onSubmit={handleSave}>
+            <p>
+              <span>Name</span>
+            </p>
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+            />
+            <p>
+              <span>Bio</span>
+            </p>
+            <textarea
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+              cols="30"
+              rows="10"
+              placeholder="Describe yourself here..."
+              maxLength={200}
+            ></textarea>
+            <p>
+              <span>Email</span>
+            </p>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <button type="submit">Save</button>
+          </form>
         </div>
-        <button>Save</button>
       </div>
     </div>
   );

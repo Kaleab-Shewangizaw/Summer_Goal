@@ -11,7 +11,7 @@ const MainLayout = () => {
         width: "98%",
         marginInline: "auto",
         marginTop: "20px",
-        height: "900px",
+        height: "95vh",
         borderRadius: "8px",
         overflow: "hidden",
       }}

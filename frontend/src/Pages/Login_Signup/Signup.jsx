@@ -3,9 +3,8 @@ import "./SignupStyle.css";
 import { useNavigate } from "react-router-dom";
 import SignUpImg from "../LandingPage/images/signup.png";
 
-import { UserContext } from "../../utils/AuthContext";
-
 const Signup = () => {
+  document.title = "Signup";
   const [isShowen, setIsShowen] = React.useState(false);
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
@@ -53,7 +52,7 @@ const Signup = () => {
   return (
     <div className="signup">
       <div className="left-c">
-        <div className="logo_icon">
+        <div className="logo_icon" onClick={() => navigate("/start")}>
           <h3>SP</h3>
         </div>
         <div className="signup-form">
@@ -88,7 +87,9 @@ const Signup = () => {
                   setPassword(e.target.value);
                 }}
               />
-              <span onClick={showPassword}>{isShowen ? "Hide" : "Show"}</span>
+              <button onClick={showPassword}>
+                {isShowen ? "Hide" : "Show"}
+              </button>
             </div>
             {error && <p style={{ color: "red", fontSize: "12px" }}>{error}</p>}
             <button onClick={handleSubmit}>Create an account</button>

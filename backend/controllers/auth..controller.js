@@ -188,3 +188,51 @@ export async function updateAccount(req, res) {
     res.status(500).json({ message: "Server error", error: err });
   }
 }
+
+export const sendFeedBack = async (req, res) => {
+  const { id } = req.params;
+  const { text, date } = req.body;
+  try {
+    const user = await User.findByIdAndUpdate(
+      id,
+      { $push: { comments: { text, date, author: id } } },
+      { new: true }
+    );
+    if (!user) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
+
+    const { comments } = user;
+    return res.status(200).json({ success: true, comments });
+  } catch (err) {
+    return res.status(500).json({ success: false, message: err });
+  }
+};
+
+export const deleteFeedBack = async (req, res) => {
+  const { id, commentId } = req.params;
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      id,
+      { $pull: { comments: { _id: commentId } } },
+      { new: true }
+    );
+    if (!updatedUser) {
+      return res
+        .status(404)
+        .json({ success: false, message: "user not found" });
+    }
+    const { comments } = updatedUser;
+    return res.status(200).json({
+      success: true,
+      message: "Comment deleted successfully",
+      comments,
+    });
+  } catch (err) {
+    return res
+      .status(500)
+      .json({ success: false, message: "Server error", error: err });
+  }
+};

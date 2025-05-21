@@ -6,6 +6,7 @@ import LoginImg from "../LandingPage/images/loginI.jpg";
 import { UserContext } from "../../utils/AuthContext";
 
 const Login = () => {
+  document.title = "Login";
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isShowen, setIsShowen] = React.useState(false);
@@ -40,7 +41,8 @@ const Login = () => {
     }
 
     setUser(data.user);
-    setNavigateTo(true);
+    // go to the homepage
+    window.location.href = "/home";
   };
 
   React.useEffect(() => {

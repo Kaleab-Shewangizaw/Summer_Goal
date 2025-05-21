@@ -8,6 +8,7 @@ import Footer from "./Componenets/Footer";
 import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
+  document.title = "Skill Planner";
   const [isMobile, setIsMobile] = React.useState(false);
   const navigate = useNavigate();
   const handleLoginClick = () => {

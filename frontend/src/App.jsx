@@ -53,7 +53,14 @@ function App() {
         <Route path="my-skills/:id/edit-skill" element={<EditSkill />} />
         <Route path="my-skills/:id" element={<SkillPage />} />
         <Route path="my-skills/new" element={<NewSkill />} />
-        <Route path="blog" element={<p>Coming soon...</p>} />
+        <Route
+          path="blog"
+          element={
+            <p>
+              <span>Blog page coming soon...</span>
+            </p>
+          }
+        />
       </Route>
 
       <Route path="*" element={<h1>404 Not Found</h1>} />
