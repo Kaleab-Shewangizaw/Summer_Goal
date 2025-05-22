@@ -14,7 +14,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(
-  cors({ credentials: true, origin: "https://summer-planner-nine.vercel.app" })
+  cors({ credentials: true, origin: "https://summer-planner-pied.vercel.app" })
 );
 
 app.use("/api/auth", AuthRoute);
