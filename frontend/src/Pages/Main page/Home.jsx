@@ -43,6 +43,10 @@ const Home = () => {
         }
 
         setUserInfo(data.userInfo);
+        if (!user || !user.id) {
+          navigate("/", { replace: true });
+          return;
+        }
       } catch (err) {
         console.log(err);
       }
@@ -57,7 +61,7 @@ const Home = () => {
       );
       const data = await res.json();
       if (!data.success) {
-        navigate("/login");
+        navigate("/");
         return;
       }
 
