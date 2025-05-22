@@ -31,7 +31,6 @@ const Home = () => {
         );
         const data = await res.json();
         if (!data.success) {
-          //remove user's cookie
           await fetch(
             "https://summergoal-production.up.railway.app/api/auth/logout",
             {
@@ -39,8 +38,7 @@ const Home = () => {
               credentials: "include",
             }
           );
-          alert(data.message || "Something went wrong, try again!");
-          navigate("/login");
+          navigate("/", { replace: true });
           return;
         }
 
@@ -105,6 +103,10 @@ const Home = () => {
     }, 86400000);
     return () => clearInterval(interval);
   }, []);
+  if (!user || !user.id) {
+    navigate("/login");
+    return null;
+  }
   if (!userInfo) return null;
 
   const numberOfPlans = plans.length;
