@@ -12,6 +12,9 @@ const MySkills = () => {
 
   const navigate = useNavigate();
 
+  if (!user || !user.id) {
+    window.location.href = "/";
+  }
   useEffect(() => {
     document.title = "My Skills";
     setLoading(true);

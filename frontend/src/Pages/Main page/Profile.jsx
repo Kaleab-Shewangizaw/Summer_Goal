@@ -8,6 +8,10 @@ const Profile = () => {
 
   document.title = "Profile";
   useEffect(() => {
+    if (!user || !user.id) {
+      navigate("/", { replace: true });
+      return;
+    }
     const fetchUserData = async () => {
       try {
         const res = await fetch(

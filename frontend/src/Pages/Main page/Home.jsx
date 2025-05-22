@@ -1,6 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-
-import "./HomeStyle.css";
+import { useNavigate } from "react-router-dom";
 import {
   FaHome,
   FaClipboardCheck,
@@ -8,29 +7,57 @@ import {
   FaCheckCircle,
   FaTrophy,
 } from "react-icons/fa";
-import { IoIosRocket, IoMdCloudDone } from "react-icons/io";
-import { BsGraphUp, BsTrophy } from "react-icons/bs";
-import PlanCard from "./PlanCard";
+import { IoIosRocket } from "react-icons/io";
+import { BsGraphUp } from "react-icons/bs";
 import { CiNoWaitingSign } from "react-icons/ci";
-import { useNavigate } from "react-router-dom";
+
+import "./HomeStyle.css";
+import PlanCard from "./PlanCard";
 import SkillCard from "./SkillCard";
 import { UserContext } from "../../utils/AuthContext";
 
 const Home = () => {
   const navigate = useNavigate();
   const { user, userInfo, setUserInfo } = useContext(UserContext);
-  const { id } = user;
+
   const [plans, setPlans] = useState([]);
   const [skills, setSkills] = useState([]);
+  const [daysLeft, setDaysLeft] = useState(0);
+
+  // Calculate days left until September 11
+  const getDaysLeft = () => {
+    const today = new Date();
+    const targetYear =
+      today.getMonth() > 8 || (today.getMonth() === 8 && today.getDate() > 11)
+        ? today.getFullYear() + 1
+        : today.getFullYear();
+    const targetDate = new Date(targetYear, 8, 11);
+    const diff = targetDate - today;
+    return Math.ceil(diff / (1000 * 60 * 60 * 24));
+  };
+
+  // Fetch user data, plans, and skills
   useEffect(() => {
     document.title = "Home";
-    const fetchUserData = async () => {
+    if (!user || !user.id) {
+      navigate("/", { replace: true });
+      return;
+    }
+
+    setDaysLeft(getDaysLeft());
+
+    const interval = setInterval(() => {
+      setDaysLeft(getDaysLeft());
+    }, 86400000);
+
+    const fetchData = async () => {
       try {
-        const res = await fetch(
-          `https://summergoal-production.up.railway.app/api/auth/profile/${id}`
+        const profileRes = await fetch(
+          `https://summergoal-production.up.railway.app/api/auth/profile/${user.id}`
         );
-        const data = await res.json();
-        if (!data.success) {
+        const profileData = await profileRes.json();
+
+        if (!profileData.success) {
           await fetch(
             "https://summergoal-production.up.railway.app/api/auth/logout",
             {
@@ -42,96 +69,58 @@ const Home = () => {
           return;
         }
 
-        setUserInfo(data.userInfo);
-        if (!user || !user.id) {
-          navigate("/", { replace: true });
-          return;
-        }
+        setUserInfo(profileData.userInfo);
+
+        const plansRes = await fetch(
+          `https://summergoal-production.up.railway.app/api/plan/${user.id}/get-plans`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+        const plansData = await plansRes.json();
+        if (plansData.success) setPlans(plansData.plans);
+
+        const skillsRes = await fetch(
+          `https://summergoal-production.up.railway.app/api/skill/${user.id}/skills`,
+          {
+            method: "GET",
+            credentials: "include",
+          }
+        );
+        const skillsData = await skillsRes.json();
+        if (skillsData.success) setSkills(skillsData.skills);
       } catch (err) {
-        console.log(err);
+        console.error(err);
       }
     };
-    const getPlans = async () => {
-      const res = await fetch(
-        `https://summergoal-production.up.railway.app/api/plan/${user.id}/get-plans`,
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
-      const data = await res.json();
-      if (!data.success) {
-        navigate("/");
-        return;
-      }
 
-      setPlans(data.plans);
-    };
-    getPlans();
-    const fetchSkills = async () => {
-      const res = await fetch(
-        `https://summergoal-production.up.railway.app/api/skill/${id}/skills`,
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
-      const data = await res.json();
-      if (!data.success) {
-        navigate("/");
-        return;
-      }
-      setSkills(data.skills);
-    };
+    fetchData();
 
-    fetchSkills();
-
-    if (id) fetchUserData();
-  }, [id]);
-
-  function getDaysLeft() {
-    const today = new Date();
-    const year =
-      today.getMonth() > 8 || (today.getMonth() === 8 && today.getDate() > 11)
-        ? today.getFullYear() + 1
-        : today.getFullYear();
-
-    const newYearDate = new Date(year, 8, 11);
-    const diff = newYearDate - today;
-    return Math.ceil(diff / (1000 * 60 * 60 * 24));
-  }
-  const [daysLeft, setDaysLeft] = useState(getDaysLeft());
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDaysLeft(getDaysLeft());
-    }, 86400000);
     return () => clearInterval(interval);
-  }, []);
-  if (!user || !user.id) {
-    navigate("/");
-    return null;
-  }
-  if (!userInfo) return null;
+  }, [user, navigate, setUserInfo]);
 
+  if (!user || !userInfo) return null;
+
+  // Stats calculations
   const numberOfPlans = plans.length;
   const completedPlans = plans.filter(
     (plan) => Number(plan.progress) >= Number(plan.target)
   ).length;
-  const pinnedPlans = plans.filter((plan) => plan.pinned === true);
   const inProgressPlans = plans.filter(
-    (plan) => Number(plan.progress) < Number(plan.target) && plan.progress > 0
+    (plan) =>
+      Number(plan.progress) > 0 && Number(plan.progress) < Number(plan.target)
   ).length;
   const notStartedPlans = plans.filter((plan) => plan.progress === 0).length;
+  const pinnedPlans = plans.filter((plan) => plan.pinned);
 
-  const completeSkills = skills.filter(
-    (skill) => skill.isAccomplished === true
-  );
-  const pinnedSkills = skills.filter((skill) => skill.pinned === true);
-  const completedSkills =
-    completeSkills.length > 5 ? completeSkills.slice(0, 5) : completeSkills;
+  const completedSkills = skills.filter((skill) => skill.isAccomplished);
+  const pinnedSkills = skills.filter((skill) => skill.pinned);
+  const shownCompletedSkills = completedSkills.slice(0, 5);
 
   return (
     <div className="home">
+      {/* Banner */}
       <div className="home-banner">
         <img
           src="https://picsum.photos/1200/250"
@@ -139,12 +128,14 @@ const Home = () => {
           style={{ width: "100%", height: "250px", objectFit: "cover" }}
         />
         <div className="home-banner-text">
-          <h1>My summer Planner</h1>
+          <h1>My Summer Planner</h1>
           <p>
-            <span>{userInfo.username}'s</span> summer planner{" "}
+            <span>{userInfo.username}'s</span> summer planner
           </p>
         </div>
       </div>
+
+      {/* Date View */}
       <div className="date-view">
         <h2>
           <FaHome
@@ -153,8 +144,7 @@ const Home = () => {
         </h2>
         <div>
           <p>
-            {" "}
-            <span>today</span>:{" "}
+            <span>Today</span>:{" "}
             {new Date().toLocaleDateString("en-US", {
               month: "long",
               day: "numeric",
@@ -169,6 +159,8 @@ const Home = () => {
           </p>
         </div>
       </div>
+
+      {/* Tracker */}
       <div className="tracker">
         <div className="tracker-c">
           <h2>
@@ -177,11 +169,10 @@ const Home = () => {
             />{" "}
             Plans
           </h2>
-
           <p>
             <span>
               <FaCheckCircle /> Completed
-            </span>
+            </span>{" "}
             {completedPlans}/{numberOfPlans}
             <span className="percent">
               {numberOfPlans > 0
@@ -190,12 +181,11 @@ const Home = () => {
               %
             </span>
           </p>
-
           <p>
             <span>
               <BsGraphUp /> In Progress
-            </span>
-            {inProgressPlans}/{numberOfPlans}{" "}
+            </span>{" "}
+            {inProgressPlans}/{numberOfPlans}
             <span className="percent">
               {Math.round((inProgressPlans / numberOfPlans) * 100) || 0}%
             </span>
@@ -203,48 +193,39 @@ const Home = () => {
           <p>
             <span>
               <CiNoWaitingSign /> Not Started
-            </span>
-            {notStartedPlans}/{numberOfPlans}{" "}
+            </span>{" "}
+            {notStartedPlans}/{numberOfPlans}
             <span className="percent">
               {Math.round((notStartedPlans / numberOfPlans) * 100) || 0}%
             </span>
           </p>
         </div>
+
         <div className="tracker-c">
           <h2>
             <IoIosRocket
-              style={{ color: "hsl(202, 100.00%, 50.00%)", fontSize: "2rem" }}
+              style={{ color: "hsl(202, 100%, 50%)", fontSize: "2rem" }}
             />{" "}
             Skills
           </h2>
-          <p>
-            {completedSkills.length > 0 && completedSkills.length > 0 ? (
-              completedSkills.map((skill) => {
-                return (
-                  <span
-                    key={skill._id}
-                    style={{
-                      display: "flex",
-                      width: "100%",
-                      marginBottom: "10px",
-                    }}
-                  >
-                    <FaTrophy
-                      style={{
-                        color: "hsl(69, 100.00%, 50.00%)",
-                        fontSize: "1.5rem",
-                      }}
-                    />
-                    {"     "}
-                    {skill.title}
-                  </span>
-                );
-              })
-            ) : (
-              <span>No skills yet</span>
-            )}
-          </p>
+          {shownCompletedSkills.length > 0 ? (
+            shownCompletedSkills.map((skill) => (
+              <span
+                key={skill._id}
+                style={{ display: "flex", width: "100%", marginBottom: "10px" }}
+              >
+                <FaTrophy
+                  style={{ color: "hsl(69, 100%, 50%)", fontSize: "1.5rem" }}
+                />
+                {"  "}
+                {skill.title}
+              </span>
+            ))
+          ) : (
+            <span>No skills yet</span>
+          )}
         </div>
+
         <div className="tracker-c">
           <h2>
             <FaMedal
@@ -258,6 +239,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Pinned Plans */}
       <div className="section2">
         <h2>Next Plan</h2>
         <div className="planView">
@@ -267,10 +249,7 @@ const Home = () => {
             <span>No plans pinned yet</span>
           )}
           <button
-            onClick={() => {
-              navigate("/home/my-plans");
-            }}
-            style={{}}
+            onClick={() => navigate("/home/my-plans")}
             className="see-all-btn"
           >
             See All Plans
@@ -278,6 +257,7 @@ const Home = () => {
         </div>
       </div>
 
+      {/* Pinned Skills */}
       <div className="section2">
         <h2>Next Skill</h2>
         <div className="planView">
@@ -289,10 +269,7 @@ const Home = () => {
             <span>No skills pinned yet</span>
           )}
           <button
-            onClick={() => {
-              navigate("/home/my-skills");
-            }}
-            style={{}}
+            onClick={() => navigate("/home/my-skills")}
             className="see-all-btn"
           >
             See All Skills

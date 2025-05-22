@@ -10,6 +10,10 @@ const MyPlans = () => {
   const [plans, setPlans] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
 
+  if (!user || !user.id) {
+    window.location.href = "/";
+  }
+
   useEffect(() => {
     document.title = "My Plans";
     setLoading(true);

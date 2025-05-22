@@ -59,7 +59,7 @@ const Setting = () => {
 
   useEffect(() => {
     if (navigateTo) {
-      return navigate("/start");
+      return navigate("/");
     }
   });
   const handleSend = async () => {
