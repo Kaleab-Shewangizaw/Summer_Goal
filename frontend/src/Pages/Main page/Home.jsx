@@ -57,7 +57,7 @@ const Home = () => {
       );
       const data = await res.json();
       if (!data.success) {
-        alert(data.message || "Something went wrong, try again!");
+        navigate("/login");
         return;
       }
 
@@ -74,7 +74,7 @@ const Home = () => {
       );
       const data = await res.json();
       if (!data.success) {
-        alert(data.message || "Something went wrong, try again!");
+        navigate("/login");
         return;
       }
       setSkills(data.skills);
