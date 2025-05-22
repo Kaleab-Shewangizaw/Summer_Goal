@@ -20,7 +20,7 @@ const EditPlan = () => {
     const getPlan = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/plan/${planId}/get-plan`,
+          `https://summergoal-production.up.railway.app/api/plan/${planId}/get-plan`,
           {
             method: "GET",
             credentials: "include",
@@ -49,7 +49,7 @@ const EditPlan = () => {
     e.preventDefault();
     try {
       const res = await fetch(
-        `http://localhost:5000/api/plan/${planId}/update-plan`,
+        `https://summergoal-production.up.railway.app/api/plan/${planId}/update-plan`,
         {
           method: "PUT",
           headers: {

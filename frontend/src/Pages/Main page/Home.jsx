@@ -26,7 +26,9 @@ const Home = () => {
     document.title = "Home";
     const fetchUserData = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/auth/profile/${id}`);
+        const res = await fetch(
+          `https://summergoal-production.up.railway.app/api/auth/profile/${id}`
+        );
         const data = await res.json();
 
         setUserInfo(data.userInfo);
@@ -36,7 +38,7 @@ const Home = () => {
     };
     const getPlans = async () => {
       const res = await fetch(
-        `http://localhost:5000/api/plan/${user.id}/get-plans`,
+        `https://summergoal-production.up.railway.app/api/plan/${user.id}/get-plans`,
         {
           method: "GET",
           credentials: "include",
@@ -52,10 +54,13 @@ const Home = () => {
     };
     getPlans();
     const fetchSkills = async () => {
-      const res = await fetch(`http://localhost:5000/api/skill/${id}/skills`, {
-        method: "GET",
-        credentials: "include",
-      });
+      const res = await fetch(
+        `https://summergoal-production.up.railway.app/api/skill/${id}/skills`,
+        {
+          method: "GET",
+          credentials: "include",
+        }
+      );
       const data = await res.json();
       if (!data.success) {
         alert(data.message || "Something went wrong, try again!");

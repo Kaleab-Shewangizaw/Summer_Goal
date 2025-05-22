@@ -11,7 +11,7 @@ const Profile = () => {
     const fetchUserData = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/auth/profile/${user.id}`
+          `https://summergoal-production.up.railway.app/api/auth/profile/${user.id}`
         );
         const data = await res.json();
         if (data.userInfo) {

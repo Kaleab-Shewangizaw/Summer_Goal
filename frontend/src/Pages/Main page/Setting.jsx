@@ -25,10 +25,13 @@ const Setting = () => {
   const [popup, setPopup] = useState(false);
   const [dpopup, setDpopup] = useState(false);
   const handleLogout = async () => {
-    await fetch("http://localhost:5000/api/auth/logout", {
-      method: "POST",
-      credentials: "include",
-    });
+    await fetch(
+      "https://summergoal-production.up.railway.app/api/auth/logout",
+      {
+        method: "POST",
+        credentials: "include",
+      }
+    );
 
     setUser(null);
     setUserInfo(null);
@@ -42,7 +45,9 @@ const Setting = () => {
   });
   const handleSend = async () => {
     const res = await fetch(
-      "http://localhost:5000/api/auth/" + userInfo._id + "/sendFeedback",
+      "https://summergoal-production.up.railway.app/api/auth/" +
+        userInfo._id +
+        "/sendFeedback",
       {
         method: "PUT",
         credentials: "include",
@@ -65,7 +70,7 @@ const Setting = () => {
 
   const handleDeleteComment = async (commentId) => {
     const res = await fetch(
-      "http://localhost:5000/api/auth/" +
+      "https://summergoal-production.up.railway.app/api/auth/" +
         userInfo._id +
         "/" +
         commentId +

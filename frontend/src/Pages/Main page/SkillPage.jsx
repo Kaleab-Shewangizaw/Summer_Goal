@@ -16,12 +16,15 @@ const SkillPage = () => {
   useEffect(() => {
     setLoading(true);
     const fetchSkillData = async () => {
-      const res = await fetch("http://localhost:5000/api/skill/" + id, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        "https://summergoal-production.up.railway.app/api/skill/" + id,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await res.json();
       setLoading(false);
       if (!data.success) {
@@ -35,7 +38,9 @@ const SkillPage = () => {
 
   const handleMarkDone = async () => {
     const res = await fetch(
-      "http://localhost:5000/api/skill/" + id + "/updateSkill",
+      "https://summergoal-production.up.railway.app/api/skill/" +
+        id +
+        "/updateSkill",
       {
         method: "PUT",
         headers: {
@@ -67,7 +72,9 @@ const SkillPage = () => {
       return;
     }
     const res = await fetch(
-      "http://localhost:5000/api/skill/" + id + "/addComment",
+      "https://summergoal-production.up.railway.app/api/skill/" +
+        id +
+        "/addComment",
       {
         method: "PUT",
         headers: {
@@ -98,7 +105,7 @@ const SkillPage = () => {
 
   const deleteComment = async (commentId) => {
     const res = await fetch(
-      `http://localhost:5000/api/skill/${id}/${commentId}/deleteComment/`,
+      `https://summergoal-production.up.railway.app/api/skill/${id}/${commentId}/deleteComment/`,
       {
         method: "PUT",
         headers: {
@@ -122,7 +129,7 @@ const SkillPage = () => {
 
   const deleteSkill = async () => {
     const res = await fetch(
-      `http://localhost:5000/api/skill/${id}/deleteSkill`,
+      `https://summergoal-production.up.railway.app/api/skill/${id}/deleteSkill`,
       {
         method: "DELETE",
         headers: {
@@ -144,7 +151,7 @@ const SkillPage = () => {
     return (
       <div className="skill-page plan-page">
         <img
-          src="https://picsum.photos/1200/250"
+          src="http://picsum.photos/1200/250"
           alt="Banner"
           style={{ width: "100%", height: "100px", objectFit: "cover" }}
         />
@@ -156,7 +163,7 @@ const SkillPage = () => {
   return (
     <div className="skill-page plan-page">
       <img
-        src="https://picsum.photos/1200/250"
+        src="http://picsum.photos/1200/250"
         alt="Banner"
         style={{ width: "100%", height: "100px", objectFit: "cover" }}
       />

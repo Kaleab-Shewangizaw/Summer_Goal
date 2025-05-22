@@ -6,7 +6,7 @@ export const UserContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
   useEffect(() => {
-    fetch("http://localhost:5000/api/auth/profile", {
+    fetch("https://summergoal-production.up.railway.app/api/auth/profile", {
       method: "GET",
       credentials: "include",
     })

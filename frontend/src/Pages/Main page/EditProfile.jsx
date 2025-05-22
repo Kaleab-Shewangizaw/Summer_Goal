@@ -15,7 +15,8 @@ const EditProfile = () => {
     e.preventDefault();
     const updateUser = async () => {
       const res = await fetch(
-        "http://localhost:5000/api/auth/edit/" + userInfo._id,
+        "https://summergoal-production.up.railway.app/api/auth/edit/" +
+          userInfo._id,
         {
           method: "PUT",
           headers: {

@@ -19,7 +19,7 @@ const NewPlan = () => {
   const createPlan = async (e) => {
     e.preventDefault();
     const res = await fetch(
-      `http://localhost:5000/api/plan/create/${user.id}`,
+      `https://summergoal-production.up.railway.app/api/plan/create/${user.id}`,
       {
         // Fixed missing comma
         method: "POST",

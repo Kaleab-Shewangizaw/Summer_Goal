@@ -20,7 +20,7 @@ const SkillCard = (props) => {
     const updatePinned = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/skill/${skill._id}/updateSkill`,
+          `https://summergoal-production.up.railway.app/api/skill/${skill._id}/updateSkill`,
           {
             method: "PUT",
             headers: {

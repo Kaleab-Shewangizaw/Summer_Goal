@@ -17,7 +17,7 @@ const MySkills = () => {
     setLoading(true);
     const getSkills = async () => {
       const res = await fetch(
-        `http://localhost:5000/api/skill/${user.id}/skills`,
+        `https://summergoal-production.up.railway.app/api/skill/${user.id}/skills`,
         {
           method: "GET",
           credentials: "include",

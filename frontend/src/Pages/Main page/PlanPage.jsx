@@ -23,7 +23,7 @@ const PlanPage = () => {
       setLoading(true);
       try {
         const res = await fetch(
-          `http://localhost:5000/api/plan/${id}/get-plan`,
+          `https://summergoal-production.up.railway.app/api/plan/${id}/get-plan`,
           {
             method: "GET",
             credentials: "include",
@@ -50,7 +50,7 @@ const PlanPage = () => {
   const handleMarkDone = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/plan/${id}/mark-done`,
+        `https://summergoal-production.up.railway.app/api/plan/${id}/mark-done`,
         {
           method: "PUT",
           headers: {
@@ -75,7 +75,7 @@ const PlanPage = () => {
   const revertPlan = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/plan/${id}/revert-plan`,
+        `https://summergoal-production.up.railway.app/api/plan/${id}/revert-plan`,
         {
           method: "PUT",
           headers: {
@@ -98,7 +98,7 @@ const PlanPage = () => {
   const deletePlan = async () => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/plan/${id}/delete-plan`,
+        `https://summergoal-production.up.railway.app/api/plan/${id}/delete-plan`,
         {
           method: "DELETE",
           headers: {
@@ -142,7 +142,7 @@ const PlanPage = () => {
     }
     try {
       const res = await fetch(
-        `http://localhost:5000/api/plan/${id}/add-comment`,
+        `https://summergoal-production.up.railway.app/api/plan/${id}/add-comment`,
         {
           method: "POST",
           headers: {
@@ -171,7 +171,7 @@ const PlanPage = () => {
   const deleteComment = async (commentId) => {
     try {
       const res = await fetch(
-        `http://localhost:5000/api/plan/${id}/${commentId}/delete-comment`,
+        `https://summergoal-production.up.railway.app/api/plan/${id}/${commentId}/delete-comment`,
         {
           method: "PUT",
           headers: {

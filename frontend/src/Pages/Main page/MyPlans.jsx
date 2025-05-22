@@ -15,7 +15,7 @@ const MyPlans = () => {
     setLoading(true);
     const getPlans = async () => {
       const res = await fetch(
-        `http://localhost:5000/api/plan/${user.id}/get-plans`,
+        `https://summergoal-production.up.railway.app/api/plan/${user.id}/get-plans`,
         {
           method: "GET",
           credentials: "include",

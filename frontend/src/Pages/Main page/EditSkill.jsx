@@ -14,12 +14,15 @@ const EditSkill = () => {
     const fetchSkillData = async () => {
       const url = window.location.pathname.split("/");
       const id = url[url.length - 2];
-      const res = await fetch("http://localhost:5000/api/skill/" + id, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await fetch(
+        "https://summergoal-production.up.railway.app/api/skill/" + id,
+        {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
       const data = await res.json();
       if (!data.success) {
         alert(data.message || "Something went wrong, try again!");
@@ -38,7 +41,9 @@ const EditSkill = () => {
     const url = window.location.pathname.split("/");
     const id = url[url.length - 2];
     const res = await fetch(
-      "http://localhost:5000/api/skill/" + id + "/updateSkill",
+      "https://summergoal-production.up.railway.app/api/skill/" +
+        id +
+        "/updateSkill",
       {
         method: "PUT",
         headers: {

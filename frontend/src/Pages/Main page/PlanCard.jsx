@@ -19,7 +19,7 @@ const PlanCard = (props) => {
     const updatePinned = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/plan/${_id}/update-plan`,
+          `https://summergoal-production.up.railway.app/api/plan/${_id}/update-plan`,
           {
             method: "PUT",
             headers: {
