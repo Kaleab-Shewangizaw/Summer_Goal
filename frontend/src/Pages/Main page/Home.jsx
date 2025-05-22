@@ -74,7 +74,7 @@ const Home = () => {
       );
       const data = await res.json();
       if (!data.success) {
-        navigate("/login");
+        navigate("/");
         return;
       }
       setSkills(data.skills);
@@ -104,7 +104,7 @@ const Home = () => {
     return () => clearInterval(interval);
   }, []);
   if (!user || !user.id) {
-    navigate("/login");
+    navigate("/");
     return null;
   }
   if (!userInfo) return null;
