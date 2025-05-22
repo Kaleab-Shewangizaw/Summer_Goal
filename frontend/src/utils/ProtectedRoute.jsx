@@ -5,7 +5,7 @@ import { useContext } from "react";
 const ProtectedRoute = ({ children }) => {
   const { user } = useContext(UserContext);
 
-  return user ? children : <Navigate to="/start" />;
+  return user ? children : <Navigate to="/" />;
 };
 
 export default ProtectedRoute;

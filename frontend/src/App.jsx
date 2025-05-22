@@ -27,7 +27,7 @@ function App() {
   return (
     <Routes>
       <Route
-        path="/start"
+        path="/"
         element={user ? <Navigate to="/home" /> : <LandingPage />}
       />
       <Route path="/login" element={<Login />} />
