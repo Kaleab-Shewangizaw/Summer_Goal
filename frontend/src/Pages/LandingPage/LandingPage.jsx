@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import MobileView from "./Componenets/MobileView";
 
 const LandingPage = () => {
-  document.title = "Skill Planner";
+  document.title = "Summer Planner";
   const [isMobile, setIsMobile] = React.useState(false);
   const navigate = useNavigate();
   const handleLoginClick = () => {

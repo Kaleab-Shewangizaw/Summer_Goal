@@ -37,6 +37,25 @@ const Setting = () => {
     setUserInfo(null);
     setNavigateTo(true);
   };
+  const handleDeleteAccount = async () => {
+    const res = await fetch(
+      "https://summergoal-production.up.railway.app/api/auth/" +
+        userInfo._id +
+        "/deleteAccount",
+      {
+        method: "DELETE",
+        credentials: "include",
+      }
+    );
+    const data = await res.json();
+    if (!data.success) {
+      alert(data.message || "something went wrong");
+      return;
+    }
+    setUser(null);
+    setUserInfo(null);
+    setNavigateTo(true);
+  };
 
   useEffect(() => {
     if (navigateTo) {
@@ -197,7 +216,7 @@ const Setting = () => {
           </p>
 
           <button
-            onClick={handleLogout}
+            onClick={handleDeleteAccount}
             style={{
               padding: "8px",
               margin: "10px",
