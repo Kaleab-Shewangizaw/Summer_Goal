@@ -40,6 +40,7 @@ const Home = () => {
             }
           );
           alert(data.message || "Something went wrong, try again!");
+          navigate("/login");
           return;
         }
 
