@@ -30,6 +30,18 @@ const Home = () => {
           `https://summergoal-production.up.railway.app/api/auth/profile/${id}`
         );
         const data = await res.json();
+        if (!data.success) {
+          //remove user's cookie
+          await fetch(
+            "https://summergoal-production.up.railway.app/api/auth/logout",
+            {
+              method: "POST",
+              credentials: "include",
+            }
+          );
+          alert(data.message || "Something went wrong, try again!");
+          return;
+        }
 
         setUserInfo(data.userInfo);
       } catch (err) {
