@@ -10,11 +10,11 @@ const MyPlans = () => {
   const [plans, setPlans] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
 
-  if (!user || !user.id) {
-    window.location.href = "/";
-  }
-
   useEffect(() => {
+    if (!user || !user.id) {
+      window.location.href = "/";
+      return;
+    }
     document.title = "My Plans";
     setLoading(true);
     const getPlans = async () => {

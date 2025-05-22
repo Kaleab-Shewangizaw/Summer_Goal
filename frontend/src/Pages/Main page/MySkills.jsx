@@ -12,10 +12,11 @@ const MySkills = () => {
 
   const navigate = useNavigate();
 
-  if (!user || !user.id) {
-    window.location.href = "/";
-  }
   useEffect(() => {
+    if (!user || !user.id) {
+      window.location.href = "/";
+      return;
+    }
     document.title = "My Skills";
     setLoading(true);
     const getSkills = async () => {
