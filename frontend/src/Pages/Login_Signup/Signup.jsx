@@ -55,7 +55,7 @@ const Signup = () => {
   return (
     <div className="signup">
       <div className="left-c">
-        <div className="logo_icon" onClick={() => navigate("/start")}>
+        <div className="logo_icon" onClick={() => navigate("/")}>
           <h3>SP</h3>
         </div>
         <div className="signup-form">
