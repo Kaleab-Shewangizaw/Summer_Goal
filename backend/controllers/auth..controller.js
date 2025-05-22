@@ -138,9 +138,14 @@ export async function logout(req, res) {
 }
 
 export async function deleteAccount(req, res) {
-  const { email } = req.body;
+  const { id } = req.params;
   try {
-    await User.findOneAndDelete({ email });
+    const deletedUser = await User.findOneAndDelete({ _id: id });
+    if (!deletedUser) {
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    }
     return res
       .cookie("token", "")
       .status(200)

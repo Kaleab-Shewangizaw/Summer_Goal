@@ -17,7 +17,7 @@ router.post("/signup", signup);
 router.get("/profile/:id", getProfileWithId);
 router.post("/login", login);
 router.post("/logout", logout);
-router.delete("/delete", deleteAccount);
+router.delete("/:id/deleteAccount", deleteAccount);
 router.get("/profile", getProfile);
 router.put("/edit/:id", updateAccount);
 router.put("/:id/sendFeedback", sendFeedBack);
