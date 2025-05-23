@@ -24,7 +24,6 @@ const Home = () => {
   const [skills, setSkills] = useState([]);
   const [daysLeft, setDaysLeft] = useState(0);
 
-  // Calculate days left until September 11
   const getDaysLeft = () => {
     const today = new Date();
     const targetYear =
@@ -40,7 +39,7 @@ const Home = () => {
   useEffect(() => {
     document.title = "Home";
     if (!user || !user.id) {
-      navigate("/", { replace: true });
+      navigate("/signup", { replace: true });
       return;
     }
 
@@ -65,7 +64,7 @@ const Home = () => {
               credentials: "include",
             }
           );
-          navigate("/", { replace: true });
+          navigate("/signup", { replace: true });
           return;
         }
 
